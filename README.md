@@ -1,7 +1,5 @@
-## Grupo A/B - Equipo {numero}
+## Grupo A - Equipo 11
 _Curso de Programación Asistida con IA - Chicas en Tecnología_ 🚀
-
-```⚠️ Dejar la opción correcta entre Grupo A (Grupo de 17 a 19hs) y Grupo B (Grupo de 19 a 21hs) y agregar el número de equipo ⚠️```
 
 En este repositorio, se presenta el sitio web realizado durante el curso de programación frontend de CET.
 
