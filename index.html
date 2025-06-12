@@ -1,9 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Proyecto</title>
-  </head>
-  <body></body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReDucativa - Fortaleciendo la Educación</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-re">Re</span><span class="logo-d">D</span><span class="logo-ucativa">ucativa</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#recursos" class="nav-link">Recursos</a></li>
+                <li><a href="#capacitacion" class="nav-link">Capacitación</a></li>
+                <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Fortaleciendo la <span class="highlight">Educación</span></h1>
+                <p class="hero-subtitle">Hacemos más accesibles los recursos educativos y fortalecemos la capacitación estudiantil</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary" id="explorar-btn">
+                        <span>Explorar Recursos</span>
+                        <div class="btn-overlay"></div>
+                    </button>
+                    <button class="btn-secondary" id="capacitacion-btn">
+                        <span>Comenzar Capacitación</span>
+                        <div class="btn-overlay"></div>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-books">
+                    <div class="book book-1"></div>
+                    <div class="book book-2"></div>
+                    <div class="book book-3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="recursos" class="features">
+        <div class="container">
+            <h2 class="section-title">Busca acá tu siguiente oportunidad</h2>
+            <div class="features-grid">
+                <div class="feature-card" data-category="recursos">
+                    <div class="card-icon">📚</div>
+                    <h3>Biblioteca Digital</h3>
+                    <p>Accede a miles de recursos educativos organizados por materias y niveles</p>
+                    <div class="card-hover-effect"></div>
+                </div>
+                <div class="feature-card" data-category="capacitacion">
+                    <div class="card-icon">🎓</div>
+                    <h3>Cursos Especializados</h3>
+                    <p>Programas de capacitación diseñados para fortalecer habilidades específicas</p>
+                    <div class="card-hover-effect"></div>
+                </div>
+                <div class="feature-card" data-category="comunidad">
+                    <div class="card-icon">👥</div>
+                    <h3>Comunidad Educativa</h3>
+                    <p>Conecta con otros estudiantes y educadores para colaborar y aprender juntos</p>
+                    <div class="card-hover-effect"></div>
+                </div>
+                <div class="feature-card" data-category="herramientas">
+                    <div class="card-icon">🔧</div>
+                    <h3>Herramientas Interactivas</h3>
+                    <p>Simuladores, calculadoras y recursos interactivos para el aprendizaje práctico</p>
+                    <div class="card-hover-effect"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title">Explora por Áreas de Conocimiento</h2>
+            <div class="knowledge-map">
+                <div class="map-item" data-area="ciencias" style="--x: 20; --y: 30;">
+                    <div class="map-marker"></div>
+                    <span class="map-label">Ciencias</span>
+                </div>
+                <div class="map-item" data-area="matematicas" style="--x: 60; --y: 20;">
+                    <div class="map-marker"></div>
+                    <span class="map-label">Matemáticas</span>
+                </div>
+                <div class="map-item" data-area="humanidades" style="--x: 80; --y: 50;">
+                    <div class="map-marker"></div>
+                    <span class="map-label">Humanidades</span>
+                </div>
+                <div class="map-item" data-area="tecnologia" style="--x: 40; --y: 70;">
+                    <div class="map-marker"></div>
+                    <span class="map-label">Tecnología</span>
+                </div>
+                <div class="map-item" data-area="arte" style="--x: 15; --y: 75;">
+                    <div class="map-marker"></div>
+                    <span class="map-label">Arte</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="10000">0</div>
+                    <div class="stat-label">Recursos Disponibles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="5000">0</div>
+                    <div class="stat-label">Estudiantes Activos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="150">0</div>
+                    <div class="stat-label">Cursos Especializados</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="98">0</div>
+                    <div class="stat-label">% Satisfacción</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>¿Listo para comenzar tu próxima oportunidad educativa?</h2>
+                <p>Únete a miles de estudiantes que ya están fortaleciendo sus conocimientos</p>
+                <button class="btn-cta" id="registrarse-btn">
+                    <span>Registrarse Gratis</span>
+                    <div class="btn-shine"></div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-re">Re</span><span class="logo-d">D</span><span class="logo-ucativa">ucativa</span>
+                    </div>
+                    <p>Fortaleciendo la educación, construyendo el futuro</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Recursos</h4>
+                        <a href="#">Biblioteca Digital</a>
+                        <a href="#">Cursos Online</a>
+                        <a href="#">Herramientas</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Comunidad</h4>
+                        <a href="#">Foros</a>
+                        <a href="#">Eventos</a>
+                        <a href="#">Blog</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Soporte</h4>
+                        <a href="#">Ayuda</a>
+                        <a href="#">Contacto</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ReDucativa. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
