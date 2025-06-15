@@ -378,69 +378,187 @@ body {
     background: linear-gradient(135deg, var(--soft-green) 0%, var(--sage-green) 100%);
 }
 
-.knowledge-map {
-    position: relative;
-    height: 400px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 20px;
-    overflow: hidden;
+.map-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 3rem;
 }
 
-.map-item {
+.map-filter {
+    background: var(--white);
+    border: 2px solid var(--primary-burgundy);
+    color: var(--primary-burgundy);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.map-filter.active,
+.map-filter:hover {
+    background: var(--primary-burgundy);
+    color: var(--white);
+}
+
+.libraries-map {
+    position: relative;
+    height: 600px;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--soft-green) 50%, var(--sage-green) 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid var(--primary-burgundy);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.libraries-map::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 30% 20%, rgba(114, 47, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(155, 175, 127, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 20% 70%, rgba(212, 165, 116, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.library-marker {
     position: absolute;
     left: calc(var(--x) * 1%);
     top: calc(var(--y) * 1%);
     cursor: pointer;
     transition: var(--transition);
+    z-index: 10;
 }
 
-.map-marker {
-    width: 20px;
-    height: 20px;
+.marker-dot {
+    width: 16px;
+    height: 16px;
     background: var(--primary-burgundy);
+    border: 3px solid var(--white);
     border-radius: 50%;
     position: relative;
-    animation: pulse 2s infinite;
+    animation: pulse 3s infinite;
+    box-shadow: 0 2px 10px rgba(114, 47, 55, 0.3);
 }
 
-.map-marker::after {
+.marker-dot::after {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
     background: var(--white);
     border-radius: 50%;
 }
 
-.map-label {
+.library-info {
     position: absolute;
-    top: -35px;
+    top: -120px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--white);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    padding: 1rem;
+    border-radius: 12px;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border: 2px solid var(--primary-burgundy);
+}
+
+.library-info::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--primary-burgundy);
+}
+
+.library-info h4 {
+    font-family: var(--font-primary);
+    color: var(--primary-burgundy);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.library-info p {
+    color: var(--charcoal);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.comuna-tag {
+    background: var(--sage-green);
+    color: var(--white);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.library-marker:hover .library-info {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.library-marker:hover .marker-dot {
+    transform: scale(1.3);
+    background: var(--warm-tan);
+}
+
+.library-marker.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.map-legend {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--white);
+    padding: 0.8rem 1.2rem;
+    border-radius: 25px;
     font-size: 0.9rem;
     font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.map-item:hover .map-label {
-    opacity: 1;
-}
-
-.map-item:hover .map-marker {
-    transform: scale(1.5);
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
 }
 
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(114, 47, 55, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(114, 47, 55, 0); }
+    70% { box-shadow: 0 0 0 8px rgba(114, 47, 55, 0); }
     100% { box-shadow: 0 0 0 0 rgba(114, 47, 55, 0); }
 }
 
