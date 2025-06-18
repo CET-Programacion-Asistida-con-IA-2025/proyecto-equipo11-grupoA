@@ -23,6 +23,12 @@ Creemos que el _mayor problema respecto a la educación actualmente_ es que la m
 
 ---
 
+## Inspiración
+
+### Moodboard
+
+<img src="./img/moodboard.jpg" ><br>
+
 ## 👥 Público Objetivo
 
 ### ¿Quiénes son nuestros usuarios?
@@ -70,14 +76,13 @@ _re(d)ucativa_ es una _página web_ que funciona como _recopilación de datos_ s
 
 ## 🛠 Tecnologías Utilizadas
 
-javascript
 const tecnologias = {
 frontend: ["HTML5", "CSS3", "JavaScript (Vanilla)"],
-styling: ["CSS Grid", "Flexbox", "Gradientes CSS"],
-fonts: ["Playfair Display", "Source Sans Pro", "Crimson Text"],
-responsive: "Mobile-first approach",
-accessibility: "WCAG 2.1 Guidelines"
-}
+estilos: ["CSS Grid", "Flexbox", "Gradientes en CSS"],
+tipografias: ["Playfair Display", "Source Sans Pro", "Crimson Text"],
+responsive: "Enfoque mobile-first",
+accesibilidad: "Pautas WCAG 2.1"
+};
 
 ## 🎨 Identidad Visual
 
@@ -259,37 +264,11 @@ Este proyecto está bajo la _Licencia MIT_ - ver el archivo [LICENSE](LICENSE) p
 
 ---
 
-## 👥 Equipo y Agradecimientos
-
-### 💻 Desarrollo
-
-- _[Tu Nombre]_ - Fundador y Desarrollador Principal
-- 🌟 _Colaboradores_ - Ver [contributors](https://github.com/tu-usuario/reducativa/contributors)
-
 ### 🙏 Agradecimientos Especiales
 
 - 📚 Bibliotecas públicas de Buenos Aires
 - 🎓 Comunidad educativa argentina
 - 💡 Todos los que creen en la educación como derecho
-
----
-
-## 📞 Contacto y Comunidad
-
-### 💌 ¿Preguntas? ¡Hablemos!
-
-- 📧 _Email_: contacto@reducativa.com
-- 🌐 _Website_: [reducativa.com](https://tu-usuario.github.io/reducativa)
-- 💬 _Formulario_: Disponible en la página principal
-- 🐙 _GitHub_: [@tu-usuario](https://github.com/tu-usuario)
-
-### 🌐 Síguenos
-
-- 📱 _Instagram_: [@reducativa.arg](https://instagram.com/reducativa.arg)
-- 🐦 _Twitter_: [@reducativa](https://twitter.com/reducativa)
-- 💼 _LinkedIn_: [re(d)ucativa](https://linkedin.com/company/reducativa)
-
----
 
 <div align="center">
 
