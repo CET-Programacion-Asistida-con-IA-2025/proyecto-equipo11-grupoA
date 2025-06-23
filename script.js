@@ -86,329 +86,340 @@ function initScrollEffects() {
 // ===== CAROUSEL FUNDADORAS REDUCATIVA =====
 
 class FoundersCarousel {
-    constructor() {
-        // Elementos del DOM
-        this.track = document.getElementById('carouselTrack');
-        this.prevBtn = document.getElementById('prevBtn');
-        this.nextBtn = document.getElementById('nextBtn');
-        this.indicators = document.getElementById('indicators');
-        this.cards = document.querySelectorAll('.founder-card');
-        
-        // Estado del carousel
-        this.currentIndex = 0;
-        this.cardsToShow = this.getCardsToShow();
-        this.maxIndex = Math.max(0, this.cards.length - this.cardsToShow);
-        this.isAnimating = false;
-        this.autoSlideInterval = null;
-        
-        // Configuración
-        this.autoSlideDelay = 6000; // 6 segundos
-        this.animationDuration = 600; // 0.6 segundos
-        
-        // Verificar que existen los elementos necesarios
-        if (this.track && this.cards.length > 0) {
-            this.init();
+  constructor() {
+    // Elementos del DOM
+    this.track = document.getElementById("carouselTrack");
+    this.prevBtn = document.getElementById("prevBtn");
+    this.nextBtn = document.getElementById("nextBtn");
+    this.indicators = document.getElementById("indicators");
+    this.cards = document.querySelectorAll(".founder-card");
+
+    // Estado del carousel
+    this.currentIndex = 0;
+    this.cardsToShow = this.getCardsToShow();
+    this.maxIndex = Math.max(0, this.cards.length - this.cardsToShow);
+    this.isAnimating = false;
+    this.autoSlideInterval = null;
+
+    // Configuración
+    this.autoSlideDelay = 6000; // 6 segundos
+    this.animationDuration = 600; // 0.6 segundos
+
+    // Verificar que existen los elementos necesarios
+    if (this.track && this.cards.length > 0) {
+      this.init();
+    }
+  }
+
+  // Determinar cuántas tarjetas mostrar según el tamaño de pantalla
+  getCardsToShow() {
+    const width = window.innerWidth;
+    if (width <= 480) return 1;
+    if (width <= 768) return 1;
+    if (width <= 1024) return 2;
+    return 3;
+  }
+
+  // Inicializar el carousel
+  init() {
+    this.createIndicators();
+    this.updateCarousel();
+    this.bindEvents();
+    this.startAutoSlide();
+
+    // Añadir clase CSS para animaciones suaves
+    this.track.style.transition = `transform ${this.animationDuration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+  }
+
+  // Crear indicadores de navegación
+  createIndicators() {
+    if (!this.indicators) return;
+
+    this.indicators.innerHTML = "";
+    const totalSlides = Math.ceil(this.cards.length / this.cardsToShow);
+
+    for (let i = 0; i < totalSlides; i++) {
+      const indicator = document.createElement("div");
+      indicator.classList.add("indicator");
+      if (i === 0) indicator.classList.add("active");
+
+      indicator.addEventListener("click", () => {
+        if (!this.isAnimating) {
+          this.goToSlide(i);
+          this.resetAutoSlide();
         }
+      });
+
+      this.indicators.appendChild(indicator);
+    }
+  }
+
+  // Actualizar posición del carousel
+  updateCarousel() {
+    if (!this.track || this.cards.length === 0) return;
+
+    const cardWidth = this.cards[0].offsetWidth;
+    const gap = 35; // Gap entre tarjetas
+    const translateX = -this.currentIndex * (cardWidth + gap);
+
+    this.track.style.transform = `translateX(${translateX}px)`;
+    this.updateIndicators();
+  }
+
+  // Actualizar indicadores activos
+  updateIndicators() {
+    if (!this.indicators) return;
+
+    const indicators = this.indicators.querySelectorAll(".indicator");
+    const activeSlide = Math.floor(this.currentIndex / this.cardsToShow);
+
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle("active", index === activeSlide);
+    });
+  }
+
+  // Ir al siguiente slide
+  next() {
+    if (this.isAnimating) return;
+
+    this.isAnimating = true;
+
+    if (this.currentIndex < this.maxIndex) {
+      this.currentIndex++;
+    } else {
+      this.currentIndex = 0; // Volver al inicio
     }
 
-    // Determinar cuántas tarjetas mostrar según el tamaño de pantalla
-    getCardsToShow() {
-        const width = window.innerWidth;
-        if (width <= 480) return 1;
-        if (width <= 768) return 1;
-        if (width <= 1024) return 2;
-        return 3;
+    this.updateCarousel();
+
+    // Resetear flag de animación
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, this.animationDuration);
+  }
+
+  // Ir al slide anterior
+  prev() {
+    if (this.isAnimating) return;
+
+    this.isAnimating = true;
+
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    } else {
+      this.currentIndex = this.maxIndex; // Ir al final
     }
 
-    // Inicializar el carousel
-    init() {
-        this.createIndicators();
-        this.updateCarousel();
-        this.bindEvents();
-        this.startAutoSlide();
-        
-        // Añadir clase CSS para animaciones suaves
-        this.track.style.transition = `transform ${this.animationDuration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+    this.updateCarousel();
+
+    // Resetear flag de animación
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, this.animationDuration);
+  }
+
+  // Ir a un slide específico
+  goToSlide(slideIndex) {
+    if (this.isAnimating) return;
+
+    this.isAnimating = true;
+    this.currentIndex = slideIndex * this.cardsToShow;
+
+    // Asegurar que no exceda los límites
+    if (this.currentIndex > this.maxIndex) {
+      this.currentIndex = this.maxIndex;
     }
 
-    // Crear indicadores de navegación
-    createIndicators() {
-        if (!this.indicators) return;
-        
-        this.indicators.innerHTML = '';
-        const totalSlides = Math.ceil(this.cards.length / this.cardsToShow);
-        
-        for (let i = 0; i < totalSlides; i++) {
-            const indicator = document.createElement('div');
-            indicator.classList.add('indicator');
-            if (i === 0) indicator.classList.add('active');
-            
-            indicator.addEventListener('click', () => {
-                if (!this.isAnimating) {
-                    this.goToSlide(i);
-                    this.resetAutoSlide();
-                }
-            });
-            
-            this.indicators.appendChild(indicator);
-        }
+    this.updateCarousel();
+
+    // Resetear flag de animación
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, this.animationDuration);
+  }
+
+  // Vincular eventos
+  bindEvents() {
+    // Botones de navegación
+    if (this.nextBtn) {
+      this.nextBtn.addEventListener("click", () => {
+        this.next();
+        this.resetAutoSlide();
+      });
     }
 
-    // Actualizar posición del carousel
-    updateCarousel() {
-        if (!this.track || this.cards.length === 0) return;
-        
-        const cardWidth = this.cards[0].offsetWidth;
-        const gap = 35; // Gap entre tarjetas
-        const translateX = -this.currentIndex * (cardWidth + gap);
-        
-        this.track.style.transform = `translateX(${translateX}px)`;
-        this.updateIndicators();
+    if (this.prevBtn) {
+      this.prevBtn.addEventListener("click", () => {
+        this.prev();
+        this.resetAutoSlide();
+      });
     }
 
-    // Actualizar indicadores activos
-    updateIndicators() {
-        if (!this.indicators) return;
-        
-        const indicators = this.indicators.querySelectorAll('.indicator');
-        const activeSlide = Math.floor(this.currentIndex / this.cardsToShow);
-        
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === activeSlide);
-        });
-    }
-
-    // Ir al siguiente slide
-    next() {
-        if (this.isAnimating) return;
-        
-        this.isAnimating = true;
-        
-        if (this.currentIndex < this.maxIndex) {
-            this.currentIndex++;
-        } else {
-            this.currentIndex = 0; // Volver al inicio
-        }
-        
-        this.updateCarousel();
-        
-        // Resetear flag de animación
-        setTimeout(() => {
-            this.isAnimating = false;
-        }, this.animationDuration);
-    }
-
-    // Ir al slide anterior
-    prev() {
-        if (this.isAnimating) return;
-        
-        this.isAnimating = true;
-        
-        if (this.currentIndex > 0) {
-            this.currentIndex--;
-        } else {
-            this.currentIndex = this.maxIndex; // Ir al final
-        }
-        
-        this.updateCarousel();
-        
-        // Resetear flag de animación
-        setTimeout(() => {
-            this.isAnimating = false;
-        }, this.animationDuration);
-    }
-
-    // Ir a un slide específico
-    goToSlide(slideIndex) {
-        if (this.isAnimating) return;
-        
-        this.isAnimating = true;
-        this.currentIndex = slideIndex * this.cardsToShow;
-        
-        // Asegurar que no exceda los límites
-        if (this.currentIndex > this.maxIndex) {
-            this.currentIndex = this.maxIndex;
-        }
-        
-        this.updateCarousel();
-        
-        // Resetear flag de animación
-        setTimeout(() => {
-            this.isAnimating = false;
-        }, this.animationDuration);
-    }
-
-    // Vincular eventos
-    bindEvents() {
-        // Botones de navegación
-        if (this.nextBtn) {
-            this.nextBtn.addEventListener('click', () => {
-                this.next();
-                this.resetAutoSlide();
-            });
-        }
-        
-        if (this.prevBtn) {
-            this.prevBtn.addEventListener('click', () => {
-                this.prev();
-                this.resetAutoSlide();
-            });
-        }
-
-        // Soporte táctil para móviles
-        this.bindTouchEvents();
-
-        // Eventos de teclado
-        this.bindKeyboardEvents();
-
-        // Responsive
-        this.bindResizeEvents();
-
-        // Pausar auto-slide cuando el mouse está sobre el carousel
-        this.bindHoverEvents();
-    }
-
-    // Eventos táctiles
-    bindTouchEvents() {
-        let startX = 0;
-        let startY = 0;
-        let isDragging = false;
-        let hasMoved = false;
-
-        this.track.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-            isDragging = true;
-            hasMoved = false;
-        }, { passive: true });
-
-        this.track.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            
-            const currentX = e.touches[0].clientX;
-            const currentY = e.touches[0].clientY;
-            const diffX = Math.abs(currentX - startX);
-            const diffY = Math.abs(currentY - startY);
-            
-            // Solo prevenir scroll si el movimiento es más horizontal que vertical
-            if (diffX > diffY && diffX > 10) {
-                e.preventDefault();
-                hasMoved = true;
-            }
-        }, { passive: false });
-
-        this.track.addEventListener('touchend', (e) => {
-            if (!isDragging || !hasMoved) return;
-            
-            isDragging = false;
-            const endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
-            
-            // Mínimo movimiento para activar el cambio
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) {
-                    this.next();
-                } else {
-                    this.prev();
-                }
-                this.resetAutoSlide();
-            }
-        }, { passive: true });
-    }
+    // Soporte táctil para móviles
+    this.bindTouchEvents();
 
     // Eventos de teclado
-    bindKeyboardEvents() {
-        document.addEventListener('keydown', (e) => {
-            // Solo funcionar si el carousel está visible
-            if (!this.isElementInViewport(this.track)) return;
-            
-            switch(e.key) {
-                case 'ArrowLeft':
-                    e.preventDefault();
-                    this.prev();
-                    this.resetAutoSlide();
-                    break;
-                case 'ArrowRight':
-                    e.preventDefault();
-                    this.next();
-                    this.resetAutoSlide();
-                    break;
-            }
-        });
-    }
+    this.bindKeyboardEvents();
 
-    // Eventos de redimensionamiento
-    bindResizeEvents() {
-        let resizeTimeout;
-        
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                const oldCardsToShow = this.cardsToShow;
-                this.cardsToShow = this.getCardsToShow();
-                this.maxIndex = Math.max(0, this.cards.length - this.cardsToShow);
-                
-                // Ajustar posición actual si es necesario
-                if (this.currentIndex > this.maxIndex) {
-                    this.currentIndex = this.maxIndex;
-                }
-                
-                // Recrear indicadores si cambió el número de tarjetas visibles
-                if (oldCardsToShow !== this.cardsToShow) {
-                    this.createIndicators();
-                }
-                
-                this.updateCarousel();
-            }, 250);
-        });
-    }
+    // Responsive
+    this.bindResizeEvents();
 
-    // Eventos de hover
-    bindHoverEvents() {
-        const carouselContainer = document.querySelector('.carousel-container');
-        
-        if (carouselContainer) {
-            carouselContainer.addEventListener('mouseenter', () => {
-                this.pauseAutoSlide();
-            });
-            
-            carouselContainer.addEventListener('mouseleave', () => {
-                this.startAutoSlide();
-            });
+    // Pausar auto-slide cuando el mouse está sobre el carousel
+    this.bindHoverEvents();
+  }
+
+  // Eventos táctiles
+  bindTouchEvents() {
+    let startX = 0;
+    let startY = 0;
+    let isDragging = false;
+    let hasMoved = false;
+
+    this.track.addEventListener(
+      "touchstart",
+      (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isDragging = true;
+        hasMoved = false;
+      },
+      { passive: true }
+    );
+
+    this.track.addEventListener(
+      "touchmove",
+      (e) => {
+        if (!isDragging) return;
+
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const diffX = Math.abs(currentX - startX);
+        const diffY = Math.abs(currentY - startY);
+
+        // Solo prevenir scroll si el movimiento es más horizontal que vertical
+        if (diffX > diffY && diffX > 10) {
+          e.preventDefault();
+          hasMoved = true;
         }
-    }
+      },
+      { passive: false }
+    );
 
-    // Iniciar auto-slide
-    startAutoSlide() {
-        this.pauseAutoSlide();
-        this.autoSlideInterval = setInterval(() => {
+    this.track.addEventListener(
+      "touchend",
+      (e) => {
+        if (!isDragging || !hasMoved) return;
+
+        isDragging = false;
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+
+        // Mínimo movimiento para activar el cambio
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
             this.next();
-        }, this.autoSlideDelay);
-    }
-
-    // Pausar auto-slide
-    pauseAutoSlide() {
-        if (this.autoSlideInterval) {
-            clearInterval(this.autoSlideInterval);
-            this.autoSlideInterval = null;
+          } else {
+            this.prev();
+          }
+          this.resetAutoSlide();
         }
-    }
+      },
+      { passive: true }
+    );
+  }
 
-    // Resetear auto-slide
-    resetAutoSlide() {
+  // Eventos de teclado
+  bindKeyboardEvents() {
+    document.addEventListener("keydown", (e) => {
+      // Solo funcionar si el carousel está visible
+      if (!this.isElementInViewport(this.track)) return;
+
+      switch (e.key) {
+        case "ArrowLeft":
+          e.preventDefault();
+          this.prev();
+          this.resetAutoSlide();
+          break;
+        case "ArrowRight":
+          e.preventDefault();
+          this.next();
+          this.resetAutoSlide();
+          break;
+      }
+    });
+  }
+
+  // Eventos de redimensionamiento
+  bindResizeEvents() {
+    let resizeTimeout;
+
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const oldCardsToShow = this.cardsToShow;
+        this.cardsToShow = this.getCardsToShow();
+        this.maxIndex = Math.max(0, this.cards.length - this.cardsToShow);
+
+        // Ajustar posición actual si es necesario
+        if (this.currentIndex > this.maxIndex) {
+          this.currentIndex = this.maxIndex;
+        }
+
+        // Recrear indicadores si cambió el número de tarjetas visibles
+        if (oldCardsToShow !== this.cardsToShow) {
+          this.createIndicators();
+        }
+
+        this.updateCarousel();
+      }, 250);
+    });
+  }
+
+  // Eventos de hover
+  bindHoverEvents() {
+    const carouselContainer = document.querySelector(".carousel-container");
+
+    if (carouselContainer) {
+      carouselContainer.addEventListener("mouseenter", () => {
+        this.pauseAutoSlide();
+      });
+
+      carouselContainer.addEventListener("mouseleave", () => {
         this.startAutoSlide();
+      });
     }
+  }
 
-    // Verificar si un elemento está en el viewport
-    isElementInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
+  // Iniciar auto-slide
+  startAutoSlide() {
+    this.pauseAutoSlide();
+    this.autoSlideInterval = setInterval(() => {
+      this.next();
+    }, this.autoSlideDelay);
+  }
+
+  // Pausar auto-slide
+  pauseAutoSlide() {
+    if (this.autoSlideInterval) {
+      clearInterval(this.autoSlideInterval);
+      this.autoSlideInterval = null;
     }
+  }
 
-    // Destruir carousel (para limpieza)
-    destroy() {
+  // Resetear auto-slide
+  resetAutoSlide() {
+    this.startAutoSlide();
+  }
+
+  // Verificar si un elemento está en el viewport
+  isElementInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+}
