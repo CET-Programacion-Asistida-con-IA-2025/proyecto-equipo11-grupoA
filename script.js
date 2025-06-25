@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
   initCounters();
   initMapInteractions();
   initSmoothScrolling();
+  
+  // ✅ INICIALIZAR EL CAROUSEL
+  new FoundersCarousel();
 });
 
 // Navigation Menu Toggle
@@ -15,28 +18,32 @@ function initNavigation() {
   const navMenu = document.querySelector(".nav-menu");
   const navLinks = document.querySelectorAll(".nav-link");
 
-  hamburger.addEventListener("click", function () {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-  });
-
-  // Close menu when clicking on a link
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function () {
-      hamburger.classList.remove("active");
-      navMenu.classList.remove("active");
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", function () {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
     });
-  });
+
+    // Close menu when clicking on a link
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function () {
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
+      });
+    });
+  }
 
   // Navbar scroll effect
   window.addEventListener("scroll", function () {
     const navbar = document.querySelector(".navbar");
-    if (window.scrollY > 100) {
-      navbar.style.background = "rgba(245, 243, 231, 0.98)";
-      navbar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)";
-    } else {
-      navbar.style.background = "rgba(245, 243, 231, 0.95)";
-      navbar.style.boxShadow = "none";
+    if (navbar) {
+      if (window.scrollY > 100) {
+        navbar.style.background = "rgba(245, 243, 231, 0.98)";
+        navbar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)";
+      } else {
+        navbar.style.background = "rgba(245, 243, 231, 0.95)";
+        navbar.style.boxShadow = "none";
+      }
     }
   });
 }
@@ -73,18 +80,158 @@ function initScrollEffects() {
     section.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
     observer.observe(section);
   });
+}
 
-  // Parallax effect for hero section
-  window.addEventListener("scroll", function () {
-    // const hero = document.querySelector(".hero");
-    // if (hero) {
-    //   let offset = window.scrollY;
-    //   hero.style.backgroundPositionY = offset * 0.5 + "px";
-    // }
+// ✅ IMPLEMENTAR EFECTOS DE BOTONES
+function initButtonEffects() {
+  // Botones principales del hero
+  const explorarBtn = document.getElementById('explorar-btn');
+  const capacitacionBtn = document.getElementById('capacitacion-btn');
+  const registrarseBtn = document.getElementById('registrarse-btn');
+
+  // Efecto de click para explorar recursos
+  if (explorarBtn) {
+    explorarBtn.addEventListener('click', () => {
+      document.getElementById('recursos')?.scrollIntoView({ 
+        behavior: 'smooth' 
+      });
+    });
+  }
+
+  // Efecto de click para capacitación
+  if (capacitacionBtn) {
+    capacitacionBtn.addEventListener('click', () => {
+      document.getElementById('capacitacion')?.scrollIntoView({ 
+        behavior: 'smooth' 
+      });
+    });
+  }
+
+  // Efecto de click para registro
+  if (registrarseBtn) {
+    registrarseBtn.addEventListener('click', () => {
+      alert('¡Próximamente! Sistema de registro en desarrollo.');
+    });
+  }
+
+  // Añadir efecto de ondas a todos los botones
+  const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-cta');
+  buttons.forEach(button => {
+    button.addEventListener('click', createRippleEffect);
   });
 }
-// ===== CAROUSEL FUNDADORAS REDUCATIVA =====
 
+// Efecto de ondas en botones
+function createRippleEffect(e) {
+  const button = e.currentTarget;
+  const ripple = document.createElement('span');
+  const rect = button.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = e.clientX - rect.left - size / 2;
+  const y = e.clientY - rect.top - size / 2;
+  
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = x + 'px';
+  ripple.style.top = y + 'px';
+  ripple.classList.add('ripple');
+  
+  // Añadir estilos del ripple
+  ripple.style.position = 'absolute';
+  ripple.style.borderRadius = '50%';
+  ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+  ripple.style.transform = 'scale(0)';
+  ripple.style.animation = 'ripple 0.6s linear';
+  ripple.style.pointerEvents = 'none';
+  
+  button.style.position = 'relative';
+  button.style.overflow = 'hidden';
+  button.appendChild(ripple);
+  
+  setTimeout(() => {
+    ripple.remove();
+  }, 600);
+}
+
+// ✅ IMPLEMENTAR CONTADORES ANIMADOS
+function initCounters() {
+  // Esta función será llamada por el observer cuando la sección stats sea visible
+}
+
+function animateCounters() {
+  const statNumbers = document.querySelectorAll('.stat-number');
+  
+  statNumbers.forEach(stat => {
+    const target = parseInt(stat.getAttribute('data-target'));
+    const increment = target / 100; // Dividir en 100 pasos
+    let current = 0;
+    
+    const updateCounter = () => {
+      if (current < target) {
+        current += increment;
+        stat.textContent = Math.floor(current);
+        requestAnimationFrame(updateCounter);
+      } else {
+        stat.textContent = target;
+      }
+    };
+    
+    updateCounter();
+  });
+}
+
+// ✅ IMPLEMENTAR INTERACCIONES DEL MAPA
+function initMapInteractions() {
+  const mapLegendItems = document.querySelectorAll('.legend-item');
+  
+  mapLegendItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      item.style.transform = 'scale(1.05)';
+      item.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+    });
+    
+    item.addEventListener('mouseleave', () => {
+      item.style.transform = 'scale(1)';
+      item.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+    });
+  });
+}
+
+// ✅ IMPLEMENTAR SCROLL SUAVE
+function initSmoothScrolling() {
+  // Scroll suave para todos los enlaces de navegación
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+    });
+  });
+
+  // Scroll indicator en hero
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', () => {
+      document.getElementById('recursos')?.scrollIntoView({ 
+        behavior: 'smooth' 
+      });
+    });
+  }
+}
+
+// ===== CAROUSEL FUNDADORAS REDUCATIVA ===== 
 class FoundersCarousel {
   constructor() {
     // Elementos del DOM
