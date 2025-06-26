@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
   initCounters();
   initMapInteractions();
   initSmoothScrolling();
+  
+  // Inicializar el carousel
+  new FoundersCarousel();
 });
 
 // Navigation Menu Toggle
@@ -138,7 +141,7 @@ function initButtonEffects() {
     });
   });
 
-  // Add hover sound effect (optional)
+  // Add hover effect
   const allButtons = document.querySelectorAll("button, .feature-card");
   allButtons.forEach((btn) => {
     btn.addEventListener("mouseenter", function () {
@@ -148,6 +151,12 @@ function initButtonEffects() {
     btn.addEventListener("mouseleave", function () {
       this.style.transform = "translateY(0)";
     });
+  });
+
+  // Añadir efecto de ondas a todos los botones
+  const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-cta');
+  buttons.forEach(button => {
+    button.addEventListener('click', createRippleEffect);
   });
 }
 
@@ -203,6 +212,37 @@ function addClickEffect(element) {
   }, 600);
 }
 
+// Efecto de ondas en botones
+function createRippleEffect(e) {
+  const button = e.currentTarget;
+  const ripple = document.createElement('span');
+  const rect = button.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = e.clientX - rect.left - size / 2;
+  const y = e.clientY - rect.top - size / 2;
+  
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = x + 'px';
+  ripple.style.top = y + 'px';
+  ripple.classList.add('ripple');
+  
+  // Añadir estilos del ripple
+  ripple.style.position = 'absolute';
+  ripple.style.borderRadius = '50%';
+  ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+  ripple.style.transform = 'scale(0)';
+  ripple.style.animation = 'ripple 0.6s linear';
+  ripple.style.pointerEvents = 'none';
+  
+  button.style.position = 'relative';
+  button.style.overflow = 'hidden';
+  button.appendChild(ripple);
+  
+  setTimeout(() => {
+    ripple.remove();
+  }, 600);
+}
+
 // Initialize Counters
 function initCounters() {
   // This will be triggered by intersection observer
@@ -236,6 +276,7 @@ function animateCounters() {
 function initMapInteractions() {
   const mapFilters = document.querySelectorAll(".map-filter");
   const libraryMarkers = document.querySelectorAll(".library-marker");
+  const mapLegendItems = document.querySelectorAll('.legend-item');
 
   mapFilters.forEach((filter) => {
     filter.addEventListener("click", function () {
@@ -289,6 +330,19 @@ function initMapInteractions() {
       }, 200);
     });
   });
+
+  // Map legend items hover effects
+  mapLegendItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      item.style.transform = 'scale(1.05)';
+      item.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+    });
+    
+    item.addEventListener('mouseleave', () => {
+      item.style.transform = 'scale(1)';
+      item.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+    });
+  });
 }
 
 // Smooth Scrolling for Navigation Links
@@ -313,6 +367,16 @@ function initSmoothScrolling() {
       }
     });
   });
+
+  // Scroll indicator en hero
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', () => {
+      document.getElementById('recursos')?.scrollIntoView({ 
+        behavior: 'smooth' 
+      });
+    });
+  }
 }
 
 // Notification System
@@ -399,6 +463,188 @@ function removeNotification(notification) {
   }, 300);
 }
 
+// ===== CAROUSEL FUNDADORAS REDUCATIVA ===== 
+class FoundersCarousel {
+  constructor() {
+    // Elementos del DOM
+    this.track = document.getElementById("carouselTrack");
+    this.prevBtn = document.getElementById("prevBtn");
+    this.nextBtn = document.getElementById("nextBtn");
+    this.indicators = document.getElementById("indicators");
+    this.cards = document.querySelectorAll(".founder-card");
+    
+    // Variables de control
+    this.currentIndex = 0;
+    this.cardWidth = 300; // Ancho de cada tarjeta
+    this.gap = 20; // Espacio entre tarjetas
+    this.autoSlideDelay = 5000; // 5 segundos
+    this.autoSlideInterval = null;
+    
+    // Verificar si existen los elementos necesarios
+    if (!this.track || this.cards.length === 0) {
+      console.warn('Carousel: No se encontraron elementos necesarios');
+      return;
+    }
+    
+    // Inicializar
+    this.init();
+  }
+  
+  init() {
+    this.createIndicators();
+    this.bindEvents();
+    this.updateCarousel();
+    this.startAutoSlide();
+    this.bindHoverEvents();
+  }
+  
+  createIndicators() {
+    if (!this.indicators) return;
+    
+    this.indicators.innerHTML = '';
+    
+    for (let i = 0; i < this.cards.length; i++) {
+      const indicator = document.createElement('button');
+      indicator.classList.add('indicator');
+      if (i === 0) indicator.classList.add('active');
+      
+      indicator.addEventListener('click', () => {
+        this.goToSlide(i);
+      });
+      
+      this.indicators.appendChild(indicator);
+    }
+  }
+  
+  bindEvents() {
+    if (this.prevBtn) {
+      this.prevBtn.addEventListener('click', () => {
+        this.prev();
+      });
+    }
+    
+    if (this.nextBtn) {
+      this.nextBtn.addEventListener('click', () => {
+        this.next();
+      });
+    }
+    
+    // Touch events para dispositivos móviles
+    let startX = 0;
+    let endX = 0;
+    
+    this.track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+    
+    this.track.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      this.handleSwipe(startX, endX);
+    });
+  }
+  
+  handleSwipe(startX, endX) {
+    const threshold = 50;
+    const diff = startX - endX;
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        this.next();
+      } else {
+        this.prev();
+      }
+    }
+  }
+  
+  prev() {
+    this.currentIndex = this.currentIndex > 0 ? this.currentIndex - 1 : this.cards.length - 1;
+    this.updateCarousel();
+    this.resetAutoSlide();
+  }
+  
+  next() {
+    this.currentIndex = this.currentIndex < this.cards.length - 1 ? this.currentIndex + 1 : 0;
+    this.updateCarousel();
+    this.resetAutoSlide();
+  }
+  
+  goToSlide(index) {
+    this.currentIndex = index;
+    this.updateCarousel();
+    this.resetAutoSlide();
+  }
+  
+  updateCarousel() {
+    if (!this.track) return;
+    
+    const translateX = -(this.currentIndex * (this.cardWidth + this.gap));
+    this.track.style.transform = `translateX(${translateX}px)`;
+    
+    // Actualizar indicadores
+    const indicators = document.querySelectorAll('.indicator');
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === this.currentIndex);
+    });
+    
+    // Actualizar botones
+    if (this.prevBtn) {
+      this.prevBtn.disabled = this.currentIndex === 0;
+    }
+    
+    if (this.nextBtn) {
+      this.nextBtn.disabled = this.currentIndex === this.cards.length - 1;
+    }
+  }
+  
+  // Eventos de hover
+  bindHoverEvents() {
+    const carouselContainer = document.querySelector(".carousel-container");
+
+    if (carouselContainer) {
+      carouselContainer.addEventListener("mouseenter", () => {
+        this.pauseAutoSlide();
+      });
+
+      carouselContainer.addEventListener("mouseleave", () => {
+        this.startAutoSlide();
+      });
+    }
+  }
+
+  // Iniciar auto-slide
+  startAutoSlide() {
+    this.pauseAutoSlide();
+    this.autoSlideInterval = setInterval(() => {
+      this.next();
+    }, this.autoSlideDelay);
+  }
+
+  // Pausar auto-slide
+  pauseAutoSlide() {
+    if (this.autoSlideInterval) {
+      clearInterval(this.autoSlideInterval);
+      this.autoSlideInterval = null;
+    }
+  }
+
+  // Resetear auto-slide
+  resetAutoSlide() {
+    this.startAutoSlide();
+  }
+
+  // Verificar si un elemento está en el viewport
+  isElementInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+}
+
 // Add ripple effect CSS animation
 const style = document.createElement("style");
 style.textContent = `
@@ -410,6 +656,13 @@ style.textContent = `
     to {
       opacity: 0;
       transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  
+  @keyframes ripple {
+    to {
+      transform: scale(4);
+      opacity: 0;
     }
   }
   
