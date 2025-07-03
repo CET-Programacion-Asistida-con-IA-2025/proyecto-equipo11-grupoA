@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   </head>
   <body>
     <!-- Navigation -->
@@ -21,6 +22,7 @@
         <ul class="nav-menu">
           <li><a href="#inicio" class="nav-link">Inicio</a></li>
           <li><a href="#recursos" class="nav-link">Recursos</a></li>
+          <li><a href="#buscador" class="nav-link">Buscador</a></li>
           <li><a href="#capacitacion" class="nav-link">Capacitación</a></li>
           <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
         </ul>
@@ -107,6 +109,385 @@
               aprendizaje práctico
             </p>
             <div class="card-hover-effect"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN BUSCADOR DE CURSOS ===== -->
+    <section id="buscador" class="search-section">
+      <div class="search-header">
+        <div class="container">
+          <h2 class="section-title">Buscador de Cursos</h2>
+          <p class="search-subtitle">Encuentra la capacitación perfecta para ti</p>
+        </div>
+      </div>
+
+      <div class="search-content">
+        <div class="container">
+          <!-- Search Bar -->
+          <div class="search-bar-container">
+            <div class="search-bar">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" id="searchInput" placeholder="Buscar cursos por nombre, descripción o palabras clave...">
+              <button class="clear-search" id="clearSearch">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile Filter Toggle -->
+          <div class="mobile-filter-toggle">
+            <button id="toggleFilters" class="filter-toggle-btn">
+              <i class="fas fa-filter"></i>
+              <span>Filtros</span>
+              <span class="filter-count" id="filterCount">0</span>
+            </button>
+          </div>
+
+          <div class="content-grid">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar" id="filtersSidebar">
+              <div class="filters-header">
+                <h3>Filtros de Búsqueda</h3>
+                <button class="clear-filters" id="clearFilters">
+                  <i class="fas fa-eraser"></i>
+                  Limpiar Todo
+                </button>
+              </div>
+
+              <!-- Modalidad Filter -->
+              <div class="filter-group">
+                <button class="filter-title" data-filter="modalidad">
+                  <i class="fas fa-desktop"></i>
+                  <span>Modalidad</span>
+                  <i class="fas fa-chevron-down arrow"></i>
+                </button>
+                <div class="filter-content" id="modalidad-content">
+                  <label class="filter-option">
+                    <input type="checkbox" name="modalidad" value="presencial">
+                    <span class="checkmark"></span>
+                    Presencial
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="modalidad" value="virtual-asincrono">
+                    <span class="checkmark"></span>
+                    Virtual Asincrónico
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="modalidad" value="virtual-sincrono">
+                    <span class="checkmark"></span>
+                    Virtual Sincrónico
+                  </label>
+                </div>
+              </div>
+
+              <!-- Categoría Filter -->
+              <div class="filter-group">
+                <button class="filter-title" data-filter="categoria">
+                  <i class="fas fa-tags"></i>
+                  <span>Categoría</span>
+                  <i class="fas fa-chevron-down arrow"></i>
+                </button>
+                <div class="filter-content" id="categoria-content">
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="programacion">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-code category-icon"></i>
+                    Programación
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="arte">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-palette category-icon"></i>
+                    Arte
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="salud">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-heartbeat category-icon"></i>
+                    Salud
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="cocina">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-utensils category-icon"></i>
+                    Cocina
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="educacion-digital">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-laptop category-icon"></i>
+                    Educación Digital
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="mantenimiento">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-tools category-icon"></i>
+                    Mantenimiento
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="humanidades">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-book category-icon"></i>
+                    Humanidades
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="idiomas">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-language category-icon"></i>
+                    Idiomas
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="lengua-señas">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-hands category-icon"></i>
+                    Lengua de Señas
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="ventas">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-chart-line category-icon"></i>
+                    Ventas
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="marketing">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-bullhorn category-icon"></i>
+                    Marketing
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="psicologia">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-brain category-icon"></i>
+                    Psicología
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="ciencias">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-flask category-icon"></i>
+                    Ciencias
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="atencion-cliente">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-headset category-icon"></i>
+                    Atención al Cliente
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="categoria" value="habilidades-blandas">
+                    <span class="checkmark"></span>
+                    <i class="fas fa-users category-icon"></i>
+                    Habilidades Blandas
+                  </label>
+                </div>
+              </div>
+
+              <!-- Costo Filter -->
+              <div class="filter-group">
+                <button class="filter-title" data-filter="costo">
+                  <i class="fas fa-dollar-sign"></i>
+                  <span>Costo</span>
+                  <i class="fas fa-chevron-down arrow"></i>
+                </button>
+                <div class="filter-content" id="costo-content">
+                  <label class="filter-option">
+                    <input type="checkbox" name="costo" value="gratuito">
+                    <span class="checkmark"></span>
+                    Gratuito
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="costo" value="arancelado">
+                    <span class="checkmark"></span>
+                    Arancelado
+                  </label>
+                </div>
+              </div>
+
+              <!-- Duración Filter -->
+              <div class="filter-group">
+                <button class="filter-title" data-filter="duracion">
+                  <i class="fas fa-clock"></i>
+                  <span>Duración</span>
+                  <i class="fas fa-chevron-down arrow"></i>
+                </button>
+                <div class="filter-content" id="duracion-content">
+                  <label class="filter-option">
+                    <input type="checkbox" name="duracion" value="corta">
+                    <span class="checkmark"></span>
+                    Corta (1-4 semanas)
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="duracion" value="media">
+                    <span class="checkmark"></span>
+                    Media (1-3 meses)
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="duracion" value="larga">
+                    <span class="checkmark"></span>
+                    Larga (3+ meses)
+                  </label>
+                </div>
+              </div>
+
+              <!-- Nivel Filter -->
+              <div class="filter-group">
+                <button class="filter-title" data-filter="nivel">
+                  <i class="fas fa-signal"></i>
+                  <span>Nivel</span>
+                  <i class="fas fa-chevron-down arrow"></i>
+                </button>
+                <div class="filter-content" id="nivel-content">
+                  <label class="filter-option">
+                    <input type="checkbox" name="nivel" value="inicial">
+                    <span class="checkmark"></span>
+                    Inicial
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="nivel" value="intermedio">
+                    <span class="checkmark"></span>
+                    Intermedio
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="nivel" value="avanzado">
+                    <span class="checkmark"></span>
+                    Avanzado
+                  </label>
+                </div>
+              </div>
+
+              <!-- Certificado Filter -->
+              <div class="filter-group">
+                <button class="filter-title" data-filter="certificado">
+                  <i class="fas fa-certificate"></i>
+                  <span>Certificado</span>
+                  <i class="fas fa-chevron-down arrow"></i>
+                </button>
+                <div class="filter-content" id="certificado-content">
+                  <label class="filter-option">
+                    <input type="checkbox" name="certificado" value="si">
+                    <span class="checkmark"></span>
+                    Con Certificado
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="certificado" value="no">
+                    <span class="checkmark"></span>
+                    Sin Certificado
+                  </label>
+                </div>
+              </div>
+
+              <!-- Idioma Filter -->
+              <div class="filter-group">
+                <button class="filter-title" data-filter="idioma">
+                  <i class="fas fa-globe"></i>
+                  <span>Idioma</span>
+                  <i class="fas fa-chevron-down arrow"></i>
+                </button>
+                <div class="filter-content" id="idioma-content">
+                  <label class="filter-option">
+                    <input type="checkbox" name="idioma" value="español">
+                    <span class="checkmark"></span>
+                    Español
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="idioma" value="ingles">
+                    <span class="checkmark"></span>
+                    Inglés
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="idioma" value="otro">
+                    <span class="checkmark"></span>
+                    Otro
+                  </label>
+                </div>
+              </div>
+
+              <!-- Formato Filter -->
+              <div class="filter-group">
+                <button class="filter-title" data-filter="formato">
+                  <i class="fas fa-file-alt"></i>
+                  <span>Formato</span>
+                  <i class="fas fa-chevron-down arrow"></i>
+                </button>
+                <div class="filter-content" id="formato-content">
+                  <label class="filter-option">
+                    <input type="checkbox" name="formato" value="video">
+                    <span class="checkmark"></span>
+                    Video
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="formato" value="texto">
+                    <span class="checkmark"></span>
+                    Texto
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="formato" value="pdf">
+                    <span class="checkmark"></span>
+                    PDF
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="formato" value="clases-vivo">
+                    <span class="checkmark"></span>
+                    Clases en Vivo
+                  </label>
+                </div>
+              </div>
+
+              <!-- Accesibilidad Filter -->
+              <div class="filter-group">
+                <button class="filter-title" data-filter="accesibilidad">
+                  <i class="fas fa-universal-access"></i>
+                  <span>Accesibilidad</span>
+                  <i class="fas fa-chevron-down arrow"></i>
+                </button>
+                <div class="filter-content" id="accesibilidad-content">
+                  <label class="filter-option">
+                    <input type="checkbox" name="accesibilidad" value="subtitulos">
+                    <span class="checkmark"></span>
+                    Subtítulos
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="accesibilidad" value="lengua-señas">
+                    <span class="checkmark"></span>
+                    Lengua de Señas
+                  </label>
+                  <label class="filter-option">
+                    <input type="checkbox" name="accesibilidad" value="audio-descripcion">
+                    <span class="checkmark"></span>
+                    Audio Descripción
+                  </label>
+                </div>
+              </div>
+            </aside>
+
+            <!-- Results Section -->
+            <section class="results-section">
+              <div class="results-header">
+                <div class="results-info">
+                  <span class="results-count" id="resultsCount">0 cursos encontrados</span>
+                  <div class="active-filters" id="activeFilters"></div>
+                </div>
+                <div class="sort-options">
+                  <select id="sortSelect">
+                    <option value="relevancia">Ordenar por relevancia</option>
+                    <option value="nombre">Nombre A-Z</option>
+                    <option value="duracion">Duración</option>
+                    <option value="nivel">Nivel</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="courses-grid" id="coursesGrid">
+                <!-- Course cards will be inserted here dynamically -->
+              </div>
+
+              <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No se encontraron cursos</h3>
+                <p>Intenta modificar los filtros o términos de búsqueda</p>
+              </div>
+            </section>
           </div>
         </div>
       </div>
@@ -297,8 +678,6 @@
       <div class="carousel-indicators" id="indicators"></div>
     </section>
 
-    <script src="script.js"></script>
-
     <!-- Interactive Map Section -->
     <section class="map-section">
       <div class="container">
@@ -314,17 +693,6 @@
         </div>
 
         <div class="map-legend">
-          <div class="legend-item">
-            <div
-              class="legend-color"
-              style="background: var(--primary-burgundy)"
-            ></div>
-            <span>Bibliotecas Públicas</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-color" style="background: var(--warm-tan)"></div>
-            <span>Recursos Especializados</span>
-          </div>
           <div class="legend-item">
             <div
               class="legend-color"
@@ -416,4 +784,15 @@
 
     <script src="script.js"></script>
   </body>
-</html>
+</html>d: var(--primary-burgundy)"
+            ></div>
+            <span>Bibliotecas Públicas</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--warm-tan)"></div>
+            <span>Recursos Especializados</span>
+          </div>
+          <div class="legend-item">
+            <div
+              class="legend-color"
+              style="backgroun 
