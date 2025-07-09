@@ -516,7 +516,6 @@ function getCategoryIcon(categoria) {
         'atencion-cliente': 'fa-headset',
         'habilidades-blandas': 'fa-users'
     };
-<<<<<<< HEAD
     return icons[categoria] || 'fa-book';
 }
 
@@ -1048,91 +1047,3 @@ function initCarousel() {
 }
 
 console.log("📝 ReDucativa Script Cargado");
-=======
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-// ========================================
-// JAVASCRIPT PARA EL CARRUSEL
-// ========================================
-
-let currentSlide = 0;
-const slides = document.querySelectorAll('.carousel-img');
-const indicators = document.querySelectorAll('.indicator');
-const totalSlides = slides.length;
-let slideInterval;
-
-// Función para mostrar una diapositiva específica
-function showSlide(index) {
-    // Remover clase active de todas las imágenes e indicadores
-    slides.forEach(slide => slide.classList.remove('active'));
-    indicators.forEach(indicator => indicator.classList.remove('active'));
-    
-    // Agregar clase active a la imagen e indicador actual
-    slides[index].classList.add('active');
-    indicators[index].classList.add('active');
-    
-    currentSlide = index;
-}
-
-// Función para cambiar diapositiva (botones prev/next)
-function changeSlide(direction) {
-    currentSlide += direction;
-    
-    // Ciclo infinito
-    if (currentSlide >= totalSlides) {
-        currentSlide = 0;
-    } else if (currentSlide < 0) {
-        currentSlide = totalSlides - 1;
-    }
-    
-    showSlide(currentSlide);
-    resetAutoSlide();
-}
-
-// Función para ir a una diapositiva específica (indicadores)
-function goToSlide(index) {
-    currentSlide = index;
-    showSlide(currentSlide);
-    resetAutoSlide();
-}
-
-// Función para iniciar el slide automático
-function startAutoSlide() {
-    slideInterval = setInterval(() => {
-        changeSlide(1);
-    }, 5000); // Cambia cada 5 segundos
-}
-
-// Función para reiniciar el slide automático
-function resetAutoSlide() {
-    clearInterval(slideInterval);
-    startAutoSlide();
-}
-
-// Función para pausar el slide automático
-function pauseAutoSlide() {
-    clearInterval(slideInterval);
-}
-
-// Inicializar el carrusel
-document.addEventListener('DOMContentLoaded', function() {
-    showSlide(0);
-    startAutoSlide();
-    
-    // Pausar en hover
-    const carousel = document.querySelector('.hero-carousel');
-    carousel.addEventListener('mouseenter', pauseAutoSlide);
-    carousel.addEventListener('mouseleave', startAutoSlide);
-    
-    // Soporte para navegación con teclado
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') {
-            changeSlide(-1);
-        } else if (e.key === 'ArrowRight') {
-            changeSlide(1);
-        }
-    });
-});
->>>>>>> a751d16114c35164b4869177faef71c9d6229e50

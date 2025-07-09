@@ -149,27 +149,109 @@ body {
     padding-top: 80px;
 }
 
+/* ========== ESTILOS PARA EL CARRUSEL ========== */
 .hero-carousel {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
     overflow: hidden;
+    z-index: 1;
 }
 
 .carousel-img {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 1.5s ease-in-out;
+    filter: brightness(0.7) contrast(1.1);
 }
 
 .carousel-img.active {
     opacity: 1;
+}
+
+/* Overlay para mejorar legibilidad del texto */
+.hero-carousel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(245, 243, 231, 0.6) 0%, 
+        rgba(200, 213, 185, 0.5) 50%, 
+        rgba(196, 165, 116, 0.4) 100%);
+    z-index: 2;
+}
+
+/* Controles de navegación */
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(114, 47, 55, 0.7);
+    border: none;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+.carousel-controls:hover {
+    opacity: 1;
+    background: rgba(114, 47, 55, 0.9);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-prev {
+    left: 30px;
+}
+
+.carousel-next {
+    right: 30px;
+}
+
+/* Indicadores del carrusel */
+.carousel-indicators {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 4;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(114, 47, 55, 0.4);
+}
+
+.indicator.active {
+    background: rgba(114, 47, 55, 0.9);
+    border-color: rgba(114, 47, 55, 0.9);
+    transform: scale(1.3);
 }
 
 .hero-content {
@@ -181,7 +263,7 @@ body {
     gap: 4rem;
     align-items: center;
     position: relative;
-    z-index: 1;
+    z-index: 3;
 }
 
 .hero-title {
@@ -319,11 +401,12 @@ body {
 
 .scroll-indicator {
     position: absolute;
-    bottom: 2rem;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
-    z-index: 1;
+    z-index: 5;
+    animation: bounce 2s infinite;
 }
 
 .scroll-arrow {
@@ -332,13 +415,19 @@ body {
     border-right: 2px solid var(--primary-burgundy);
     border-bottom: 2px solid var(--primary-burgundy);
     transform: rotate(45deg);
-    animation: bounce 2s infinite;
+    opacity: 0.8;
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
-    40% { transform: translateY(-10px) rotate(45deg); }
-    60% { transform: translateY(-5px) rotate(45deg); }
+    0%, 20%, 50%, 80%, 100% { 
+        transform: translateX(-50%) translateY(0); 
+    }
+    40% { 
+        transform: translateX(-50%) translateY(-10px); 
+    }
+    60% { 
+        transform: translateX(-50%) translateY(-5px); 
+    }
 }
 
 /* Features Section */
@@ -1250,34 +1339,6 @@ body {
     transition: fill 0.3s ease;
 }
 
-.carousel-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 40px;
-}
-
-.indicator {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: rgba(122, 36, 56, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.indicator.active {
-    background: var(--primary-burgundy);
-    transform: scale(1.3);
-    border-color: var(--warm-tan);
-}
-
-.indicator:hover:not(.active) {
-    background: var(--warm-tan);
-    transform: scale(1.1);
-}
-
 /* ===== MAPA ===== */
 .map-section {
     padding: 8rem 0;
@@ -1652,6 +1713,34 @@ body {
     .course-title {
         font-size: 1.2rem;
     }
+    
+    /* Carrusel responsive */
+    .carousel-controls {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .carousel-prev {
+        left: 15px;
+    }
+    
+    .carousel-next {
+        right: 15px;
+    }
+    
+    .carousel-indicators {
+        bottom: 90px;
+    }
+    
+    .scroll-indicator {
+        bottom: 40px;
+    }
+    
+    .indicator {
+        width: 10px;
+        height: 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1672,27 +1761,20 @@ body {
         margin-bottom: var(--spacing-md);
     }
     
-    .course-content {
-        padding: var(--spacing-md);
-    }
-    
     .course-title {
         font-size: 1.1rem;
     }
     
-    .course-meta {
-        flex-direction: column;
-        gap: var(--spacing-sm);
+    .course-description {
+        font-size: 0.9rem;
     }
     
-    .course-actions {
-        flex-direction: column;
-        gap: var(--spacing-sm);
+    .course-info {
+        padding: var(--spacing-sm);
     }
     
-    .course-button {
-        width: 100%;
-        justify-content: center;
+    .info-item {
+        font-size: 0.8rem;
     }
     
     .founder-card {
@@ -1723,36 +1805,9 @@ body {
     .course-footer {
         padding: var(--spacing-sm);
     }
-    
-    .course-title {
-        font-size: 1.1rem;
-    }
-    
-    .course-description {
-        font-size: 0.9rem;
-    }
-    
-    .course-info {
-        padding: var(--spacing-sm);
-    }
-    
-    .info-item {
-        font-size: 0.8rem;
-    }
 }
 
 /* ===== ANIMACIONES ===== */
-@keyframes ripple {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -1767,7 +1822,6 @@ body {
 .course-card {
     animation: fadeInUp 0.6s ease-out;
 }
-<<<<<<< HEAD
 
 /* Estado de carga */
 .courses-grid.loading {
@@ -1816,186 +1870,4 @@ body {
 .course-card:focus-within {
     outline: 2px solid var(--primary-burgundy);
     outline-offset: 2px;
-=======
-/* ========================================
-   ESTILOS PARA EL CARRUSEL
-   ======================================== */
-
-/* Contenedor principal del carrusel */
-.hero-carousel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-}
-
-/* Imágenes del carrusel */
-.carousel-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    filter: brightness(0.7) contrast(1.1);
-}
-
-/* Imagen activa */
-.carousel-img.active {
-    opacity: 1;
-}
-
-/* Overlay para mejorar legibilidad del texto */
-.hero-carousel::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, 
-        rgba(245, 243, 231, 0.6) 0%, 
-        rgba(200, 213, 185, 0.5) 50%, 
-        rgba(196, 165, 116, 0.4) 100%);
-    z-index: 2;
-}
-
-/* Asegurar que el contenido esté encima del carrusel */
-.hero-content {
-    position: relative;
-    z-index: 3;
-}
-
-/* Indicadores más discretos */
-/* Indicadores del carrusel - movidos más arriba */
-.carousel-indicators {
-    position: absolute;
-    bottom: 80px;  /* Aumentado desde 60px */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-    z-index: 4;
-}
-
-.indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.6);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(114, 47, 55, 0.4);
-}
-
-.indicator.active {
-    background: rgba(114, 47, 55, 0.9);
-    border-color: rgba(114, 47, 55, 0.9);
-    transform: scale(1.3);
-}
-/* Controles de navegación */
-/* Controles de navegación ajustados */
-.carousel-controls {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(114, 47, 55, 0.7);
-    border: none;
-    color: white;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    opacity: 0.8;
-    font-weight: bold;
-}
-
-
-.carousel-controls:hover {
-    opacity: 1;
-    background: rgba(114, 47, 55, 0.9);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-prev {
-    left: 30px;
-}
-
-.carousel-next {
-    right: 30px;
-}
-
-/* Mover el scroll indicator más abajo */
-/* Scroll indicator ajustado */
-/* Scroll indicator - movido más abajo */
-.scroll-indicator {
-    position: absolute;
-    bottom: 30px;  /* Aumentado desde 20px */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-    animation: bounce 2s infinite;
-}
-.scroll-arrow {
-    width: 24px;
-    height: 24px;
-    border-right: 2px solid #722F37;
-    border-bottom: 2px solid #722F37;
-    transform: rotate(45deg);
-    opacity: 0.8;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    40% {
-        transform: translateX(-50%) translateY(-10px);
-    }
-    60% {
-        transform: translateX(-50%) translateY(-5px);
-    }
-}
-
-/* Responsive */
-/* Responsive - ajustes para móviles */
-@media (max-width: 768px) {
-    .carousel-controls {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-    }
-    
-    .carousel-prev {
-        left: 15px;
-    }
-    
-    .carousel-next {
-        right: 15px;
-    }
-    
-    .carousel-indicators {
-        bottom: 90px;  /* Más separación en móviles */
-    }
-    
-    .scroll-indicator {
-        bottom: 40px;  /* Más separación en móviles */
-    }
-    
-    .indicator {
-        width: 10px;
-        height: 10px;
-    }
->>>>>>> a751d16114c35164b4869177faef71c9d6229e50
 }
