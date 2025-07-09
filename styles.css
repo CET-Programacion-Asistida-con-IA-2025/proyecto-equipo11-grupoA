@@ -1767,6 +1767,7 @@ body {
 .course-card {
     animation: fadeInUp 0.6s ease-out;
 }
+<<<<<<< HEAD
 
 /* Estado de carga */
 .courses-grid.loading {
@@ -1815,4 +1816,186 @@ body {
 .course-card:focus-within {
     outline: 2px solid var(--primary-burgundy);
     outline-offset: 2px;
+=======
+/* ========================================
+   ESTILOS PARA EL CARRUSEL
+   ======================================== */
+
+/* Contenedor principal del carrusel */
+.hero-carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Imágenes del carrusel */
+.carousel-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    filter: brightness(0.7) contrast(1.1);
+}
+
+/* Imagen activa */
+.carousel-img.active {
+    opacity: 1;
+}
+
+/* Overlay para mejorar legibilidad del texto */
+.hero-carousel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(245, 243, 231, 0.6) 0%, 
+        rgba(200, 213, 185, 0.5) 50%, 
+        rgba(196, 165, 116, 0.4) 100%);
+    z-index: 2;
+}
+
+/* Asegurar que el contenido esté encima del carrusel */
+.hero-content {
+    position: relative;
+    z-index: 3;
+}
+
+/* Indicadores más discretos */
+/* Indicadores del carrusel - movidos más arriba */
+.carousel-indicators {
+    position: absolute;
+    bottom: 80px;  /* Aumentado desde 60px */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 4;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(114, 47, 55, 0.4);
+}
+
+.indicator.active {
+    background: rgba(114, 47, 55, 0.9);
+    border-color: rgba(114, 47, 55, 0.9);
+    transform: scale(1.3);
+}
+/* Controles de navegación */
+/* Controles de navegación ajustados */
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(114, 47, 55, 0.7);
+    border: none;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+
+.carousel-controls:hover {
+    opacity: 1;
+    background: rgba(114, 47, 55, 0.9);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-prev {
+    left: 30px;
+}
+
+.carousel-next {
+    right: 30px;
+}
+
+/* Mover el scroll indicator más abajo */
+/* Scroll indicator ajustado */
+/* Scroll indicator - movido más abajo */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;  /* Aumentado desde 20px */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    animation: bounce 2s infinite;
+}
+.scroll-arrow {
+    width: 24px;
+    height: 24px;
+    border-right: 2px solid #722F37;
+    border-bottom: 2px solid #722F37;
+    transform: rotate(45deg);
+    opacity: 0.8;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* Responsive */
+/* Responsive - ajustes para móviles */
+@media (max-width: 768px) {
+    .carousel-controls {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .carousel-prev {
+        left: 15px;
+    }
+    
+    .carousel-next {
+        right: 15px;
+    }
+    
+    .carousel-indicators {
+        bottom: 90px;  /* Más separación en móviles */
+    }
+    
+    .scroll-indicator {
+        bottom: 40px;  /* Más separación en móviles */
+    }
+    
+    .indicator {
+        width: 10px;
+        height: 10px;
+    }
+>>>>>>> a751d16114c35164b4869177faef71c9d6229e50
 }
