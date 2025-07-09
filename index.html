@@ -9,7 +9,6 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   </head>
   <body>
     <!-- Navigation -->
@@ -36,6 +35,13 @@
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
+      <!--midifico aca chtgpt-->
+       <div class="hero-carousel">
+             <img src="img1.jpg" alt="Imagen 1" class="carousel-img active" />
+              <img src="img2.jpg" alt="Imagen 2" class="carousel-img" />
+             <img src="img3.jpg" alt="Imagen 3" class="carousel-img" />
+      </div>
+
       <div class="hero-content">
         <div class="hero-text">
           <h1 class="hero-title">
@@ -68,7 +74,6 @@
         <div class="scroll-arrow"></div>
       </div>
     </section>
-
     <!-- Features Section -->
     <section id="recursos" class="features">
       <div class="container">
@@ -114,7 +119,7 @@
       </div>
     </section>
 
-    <!-- ===== SECCIÓN BUSCADOR DE CURSOS ===== -->
+<!-- ===== SECCIÓN BUSCADOR DE CURSOS ===== -->
     <section id="buscador" class="search-section">
       <div class="search-header">
         <div class="container">
@@ -492,7 +497,7 @@
         </div>
       </div>
     </section>
-
+    
     <!-- SECCIÓN FUNDADORAS -->
     <section class="founders-carousel">
       <div class="carousel-title">
@@ -511,7 +516,7 @@
             <div class="founder-photo">
               <img
                 src="https://images.unsplash.com/photo-1494790108755-2616b78a1e87?w=300&h=300&fit=crop&crop=face"
-                alt="Ivana Herz"
+                alt="María González"
               />
             </div>
             <h3 class="founder-name">Ivana Herz</h3>
@@ -555,7 +560,7 @@
             <div class="founder-photo">
               <img
                 src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face"
-                alt="Candela Ferreyro"
+                alt="Carmen Silva"
               />
             </div>
             <h3 class="founder-name">Candela Ferreyro</h3>
@@ -624,12 +629,13 @@
                 alt="Sofía Herrera"
               />
             </div>
-            <h3 class="founder-name">Sofía Herrera</h3>
-            <p class="founder-role">Directora de Contenidos & Cofundadora</p>
+            <h3 class="founder-name">Abril Fracisca Fabian</h3>
+            <p class="founder-role">★Estudiante de cet & fonoaudilogia★</p>
             <p class="founder-bio">
-              Licenciada en Comunicación Social con especialización en
-              contenidos educativos multimedia. Crea recursos pedagógicos
-              innovadores que transforman el aprendizaje tradicional.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+              
             </p>
             <div class="founder-skills">
               <span class="skill-tag">Contenidos</span>
@@ -678,6 +684,8 @@
       <div class="carousel-indicators" id="indicators"></div>
     </section>
 
+    <script src="script.js"></script>
+
     <!-- Interactive Map Section -->
     <section class="map-section">
       <div class="container">
@@ -694,7 +702,21 @@
 
         <div class="map-legend">
           <div class="legend-item">
-            <div class="legend-color" style="background: var(--sage-green)"></div>
+            <div
+              class="legend-color"
+              style="background: var(--primary-burgundy)"
+            ></div>
+            <span>Bibliotecas Públicas</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--warm-tan)"></div>
+            <span>Recursos Especializados</span>
+          </div>
+          <div class="legend-item">
+            <div
+              class="legend-color"
+              style="background: var(--sage-green)"
+            ></div>
             <span>Talleres y Actividades</span>
           </div>
         </div>
@@ -781,12 +803,4 @@
 
     <script src="script.js"></script>
   </body>
-</html>d-color" style="background: var(--primary-burgundy)"></div>
-            <span>Bibliotecas Públicas</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-color" style="background: var(--warm-tan)"></div>
-            <span>Recursos Especializados</span>
-          </div>
-          <div class="legend-item">
-            <div class="legen
+</html>
