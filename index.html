@@ -9,11 +9,16 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
-<<<<<<< HEAD
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-=======
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
->>>>>>> a751d16114c35164b4869177faef71c9d6229e50
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- Navigation -->
@@ -40,62 +45,78 @@
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
-        <!-- Carrusel de Imágenes -->
-        <div class="hero-carousel">
-            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=800&fit=crop" 
-                 alt="Estudiantes en biblioteca" class="carousel-img active" />
-            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&h=800&fit=crop" 
-                 alt="Educación digital" class="carousel-img" />
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=800&fit=crop" 
-                 alt="Capacitación grupal" class="carousel-img" />
-            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&h=800&fit=crop" 
-                 alt="Recursos educativos" class="carousel-img" />
-        </div>
+      <!-- Carrusel de Imágenes -->
+      <div class="hero-carousel">
+        <img
+          src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=800&fit=crop"
+          alt="Estudiantes en biblioteca"
+          class="carousel-img active"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&h=800&fit=crop"
+          alt="Educación digital"
+          class="carousel-img"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=800&fit=crop"
+          alt="Capacitación grupal"
+          class="carousel-img"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&h=800&fit=crop"
+          alt="Recursos educativos"
+          class="carousel-img"
+        />
+      </div>
 
-        <!-- Controles de Navegación -->
-        <button class="carousel-controls carousel-prev" onclick="changeSlide(-1)">‹</button>
-        <button class="carousel-controls carousel-next" onclick="changeSlide(1)">›</button>
+      <!-- Controles de Navegación -->
+      <button class="carousel-controls carousel-prev" onclick="changeSlide(-1)">
+        ‹
+      </button>
+      <button class="carousel-controls carousel-next" onclick="changeSlide(1)">
+        ›
+      </button>
 
-        <!-- Indicadores -->
-        <div class="carousel-indicators">
-            <span class="indicator active" onclick="goToSlide(0)"></span>
-            <span class="indicator" onclick="goToSlide(1)"></span>
-            <span class="indicator" onclick="goToSlide(2)"></span>
-            <span class="indicator" onclick="goToSlide(3)"></span>
-        </div>
+      <!-- Indicadores -->
+      <div class="carousel-indicators">
+        <span class="indicator active" onclick="goToSlide(0)"></span>
+        <span class="indicator" onclick="goToSlide(1)"></span>
+        <span class="indicator" onclick="goToSlide(2)"></span>
+        <span class="indicator" onclick="goToSlide(3)"></span>
+      </div>
 
-        <!-- Contenido del Hero -->
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    Fortaleciendo la <span class="highlight">Educación</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Hacemos más accesibles los recursos educativos y fortalecemos la
-                    capacitación estudiantil
-                </p>
-                <div class="cta-buttons">
-                    <button class="btn-primary" id="explorar-btn">
-                        <span>Explorar Recursos</span>
-                    </button>
-                    <button class="btn-secondary" id="capacitacion-btn">
-                        <span>Comenzar Capacitación</span>
-                    </button>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="floating-books">
-                    <div class="book book-1"></div>
-                    <div class="book book-2"></div>
-                    <div class="book book-3"></div>
-                </div>
-            </div>
+      <!-- Contenido del Hero -->
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            Fortaleciendo la <span class="highlight">Educación</span>
+          </h1>
+          <p class="hero-subtitle">
+            Hacemos más accesibles los recursos educativos y fortalecemos la
+            capacitación estudiantil
+          </p>
+          <div class="cta-buttons">
+            <button class="btn-primary" id="explorar-btn">
+              <span>Explorar Recursos</span>
+            </button>
+            <button class="btn-secondary" id="capacitacion-btn">
+              <span>Comenzar Capacitación</span>
+            </button>
+          </div>
         </div>
-        
-        <!-- Scroll Indicator (movido más abajo) -->
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
+        <div class="hero-visual">
+          <div class="floating-books">
+            <div class="book book-1"></div>
+            <div class="book book-2"></div>
+            <div class="book book-3"></div>
+          </div>
         </div>
+      </div>
+
+      <!-- Scroll Indicator (movido más abajo) -->
+      <div class="scroll-indicator">
+        <div class="scroll-arrow"></div>
+      </div>
     </section>
 
     <!-- Features Section -->
@@ -148,7 +169,9 @@
       <div class="search-header">
         <div class="container">
           <h2 class="section-title">Buscador de Cursos</h2>
-          <p class="search-subtitle">Encuentra la capacitación perfecta para ti</p>
+          <p class="search-subtitle">
+            Encuentra la capacitación perfecta para ti
+          </p>
         </div>
       </div>
 
@@ -158,7 +181,11 @@
           <div class="search-bar-container">
             <div class="search-bar">
               <i class="fas fa-search search-icon"></i>
-              <input type="text" id="searchInput" placeholder="Buscar cursos por nombre, descripción o palabras clave...">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Buscar cursos por nombre, descripción o palabras clave..."
+              />
               <button class="clear-search" id="clearSearch">
                 <i class="fas fa-times"></i>
               </button>
@@ -194,17 +221,29 @@
                 </button>
                 <div class="filter-content" id="modalidad-content">
                   <label class="filter-option">
-                    <input type="checkbox" name="modalidad" value="presencial">
+                    <input
+                      type="checkbox"
+                      name="modalidad"
+                      value="presencial"
+                    />
                     <span class="checkmark"></span>
                     Presencial
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="modalidad" value="virtual-asincrono">
+                    <input
+                      type="checkbox"
+                      name="modalidad"
+                      value="virtual-asincrono"
+                    />
                     <span class="checkmark"></span>
                     Virtual Asincrónico
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="modalidad" value="virtual-sincrono">
+                    <input
+                      type="checkbox"
+                      name="modalidad"
+                      value="virtual-sincrono"
+                    />
                     <span class="checkmark"></span>
                     Virtual Sincrónico
                   </label>
@@ -220,91 +259,123 @@
                 </button>
                 <div class="filter-content" id="categoria-content">
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="programacion">
+                    <input
+                      type="checkbox"
+                      name="categoria"
+                      value="programacion"
+                    />
                     <span class="checkmark"></span>
                     <i class="fas fa-code category-icon"></i>
                     Programación
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="arte">
+                    <input type="checkbox" name="categoria" value="arte" />
                     <span class="checkmark"></span>
                     <i class="fas fa-palette category-icon"></i>
                     Arte
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="salud">
+                    <input type="checkbox" name="categoria" value="salud" />
                     <span class="checkmark"></span>
                     <i class="fas fa-heartbeat category-icon"></i>
                     Salud
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="cocina">
+                    <input type="checkbox" name="categoria" value="cocina" />
                     <span class="checkmark"></span>
                     <i class="fas fa-utensils category-icon"></i>
                     Cocina
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="educacion-digital">
+                    <input
+                      type="checkbox"
+                      name="categoria"
+                      value="educacion-digital"
+                    />
                     <span class="checkmark"></span>
                     <i class="fas fa-laptop category-icon"></i>
                     Educación Digital
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="mantenimiento">
+                    <input
+                      type="checkbox"
+                      name="categoria"
+                      value="mantenimiento"
+                    />
                     <span class="checkmark"></span>
                     <i class="fas fa-tools category-icon"></i>
                     Mantenimiento
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="humanidades">
+                    <input
+                      type="checkbox"
+                      name="categoria"
+                      value="humanidades"
+                    />
                     <span class="checkmark"></span>
                     <i class="fas fa-book category-icon"></i>
                     Humanidades
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="idiomas">
+                    <input type="checkbox" name="categoria" value="idiomas" />
                     <span class="checkmark"></span>
                     <i class="fas fa-language category-icon"></i>
                     Idiomas
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="lengua-señas">
+                    <input
+                      type="checkbox"
+                      name="categoria"
+                      value="lengua-señas"
+                    />
                     <span class="checkmark"></span>
                     <i class="fas fa-hands category-icon"></i>
                     Lengua de Señas
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="ventas">
+                    <input type="checkbox" name="categoria" value="ventas" />
                     <span class="checkmark"></span>
                     <i class="fas fa-chart-line category-icon"></i>
                     Ventas
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="marketing">
+                    <input type="checkbox" name="categoria" value="marketing" />
                     <span class="checkmark"></span>
                     <i class="fas fa-bullhorn category-icon"></i>
                     Marketing
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="psicologia">
+                    <input
+                      type="checkbox"
+                      name="categoria"
+                      value="psicologia"
+                    />
                     <span class="checkmark"></span>
                     <i class="fas fa-brain category-icon"></i>
                     Psicología
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="ciencias">
+                    <input type="checkbox" name="categoria" value="ciencias" />
                     <span class="checkmark"></span>
                     <i class="fas fa-flask category-icon"></i>
                     Ciencias
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="atencion-cliente">
+                    <input
+                      type="checkbox"
+                      name="categoria"
+                      value="atencion-cliente"
+                    />
                     <span class="checkmark"></span>
                     <i class="fas fa-headset category-icon"></i>
                     Atención al Cliente
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="categoria" value="habilidades-blandas">
+                    <input
+                      type="checkbox"
+                      name="categoria"
+                      value="habilidades-blandas"
+                    />
                     <span class="checkmark"></span>
                     <i class="fas fa-users category-icon"></i>
                     Habilidades Blandas
@@ -321,12 +392,12 @@
                 </button>
                 <div class="filter-content" id="costo-content">
                   <label class="filter-option">
-                    <input type="checkbox" name="costo" value="gratuito">
+                    <input type="checkbox" name="costo" value="gratuito" />
                     <span class="checkmark"></span>
                     Gratuito
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="costo" value="arancelado">
+                    <input type="checkbox" name="costo" value="arancelado" />
                     <span class="checkmark"></span>
                     Arancelado
                   </label>
@@ -342,17 +413,17 @@
                 </button>
                 <div class="filter-content" id="duracion-content">
                   <label class="filter-option">
-                    <input type="checkbox" name="duracion" value="corta">
+                    <input type="checkbox" name="duracion" value="corta" />
                     <span class="checkmark"></span>
                     Corta (1-4 semanas)
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="duracion" value="media">
+                    <input type="checkbox" name="duracion" value="media" />
                     <span class="checkmark"></span>
                     Media (1-3 meses)
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="duracion" value="larga">
+                    <input type="checkbox" name="duracion" value="larga" />
                     <span class="checkmark"></span>
                     Larga (3+ meses)
                   </label>
@@ -368,17 +439,17 @@
                 </button>
                 <div class="filter-content" id="nivel-content">
                   <label class="filter-option">
-                    <input type="checkbox" name="nivel" value="inicial">
+                    <input type="checkbox" name="nivel" value="inicial" />
                     <span class="checkmark"></span>
                     Inicial
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="nivel" value="intermedio">
+                    <input type="checkbox" name="nivel" value="intermedio" />
                     <span class="checkmark"></span>
                     Intermedio
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="nivel" value="avanzado">
+                    <input type="checkbox" name="nivel" value="avanzado" />
                     <span class="checkmark"></span>
                     Avanzado
                   </label>
@@ -394,12 +465,12 @@
                 </button>
                 <div class="filter-content" id="certificado-content">
                   <label class="filter-option">
-                    <input type="checkbox" name="certificado" value="si">
+                    <input type="checkbox" name="certificado" value="si" />
                     <span class="checkmark"></span>
                     Con Certificado
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="certificado" value="no">
+                    <input type="checkbox" name="certificado" value="no" />
                     <span class="checkmark"></span>
                     Sin Certificado
                   </label>
@@ -415,17 +486,17 @@
                 </button>
                 <div class="filter-content" id="idioma-content">
                   <label class="filter-option">
-                    <input type="checkbox" name="idioma" value="español">
+                    <input type="checkbox" name="idioma" value="español" />
                     <span class="checkmark"></span>
                     Español
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="idioma" value="ingles">
+                    <input type="checkbox" name="idioma" value="ingles" />
                     <span class="checkmark"></span>
                     Inglés
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="idioma" value="otro">
+                    <input type="checkbox" name="idioma" value="otro" />
                     <span class="checkmark"></span>
                     Otro
                   </label>
@@ -441,22 +512,22 @@
                 </button>
                 <div class="filter-content" id="formato-content">
                   <label class="filter-option">
-                    <input type="checkbox" name="formato" value="video">
+                    <input type="checkbox" name="formato" value="video" />
                     <span class="checkmark"></span>
                     Video
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="formato" value="texto">
+                    <input type="checkbox" name="formato" value="texto" />
                     <span class="checkmark"></span>
                     Texto
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="formato" value="pdf">
+                    <input type="checkbox" name="formato" value="pdf" />
                     <span class="checkmark"></span>
                     PDF
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="formato" value="clases-vivo">
+                    <input type="checkbox" name="formato" value="clases-vivo" />
                     <span class="checkmark"></span>
                     Clases en Vivo
                   </label>
@@ -472,17 +543,29 @@
                 </button>
                 <div class="filter-content" id="accesibilidad-content">
                   <label class="filter-option">
-                    <input type="checkbox" name="accesibilidad" value="subtitulos">
+                    <input
+                      type="checkbox"
+                      name="accesibilidad"
+                      value="subtitulos"
+                    />
                     <span class="checkmark"></span>
                     Subtítulos
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="accesibilidad" value="lengua-señas">
+                    <input
+                      type="checkbox"
+                      name="accesibilidad"
+                      value="lengua-señas"
+                    />
                     <span class="checkmark"></span>
                     Lengua de Señas
                   </label>
                   <label class="filter-option">
-                    <input type="checkbox" name="accesibilidad" value="audio-descripcion">
+                    <input
+                      type="checkbox"
+                      name="accesibilidad"
+                      value="audio-descripcion"
+                    />
                     <span class="checkmark"></span>
                     Audio Descripción
                   </label>
@@ -494,7 +577,9 @@
             <section class="results-section">
               <div class="results-header">
                 <div class="results-info">
-                  <span class="results-count" id="resultsCount">0 cursos encontrados</span>
+                  <span class="results-count" id="resultsCount"
+                    >0 cursos encontrados</span
+                  >
                   <div class="active-filters" id="activeFilters"></div>
                 </div>
                 <div class="sort-options">
@@ -511,7 +596,7 @@
                 <!-- Course cards will be inserted here dynamically -->
               </div>
 
-              <div class="no-results" id="noResults" style="display: none;">
+              <div class="no-results" id="noResults" style="display: none">
                 <i class="fas fa-search"></i>
                 <h3>No se encontraron cursos</h3>
                 <p>Intenta modificar los filtros o términos de búsqueda</p>
@@ -568,13 +653,11 @@
             <h3 class="founder-name">Ivana Herz</h3>
             <p class="founder-role">Directora Académica & Cofundadora</p>
             <p class="founder-bio">
-             Estudiante y oradora interesada en la educación,
-             los derechos humanos y la diplomacia.
-             Promueve espacios de formación estratégica
-             donde las juventudes puedan pensar,
-             liderar y transformar el presente. 
-             Cree en una pedagogía que potencie 
-             el pensamiento crítico y el compromiso colectivo.
+              Estudiante y oradora interesada en la educación, los derechos
+              humanos y la diplomacia. Promueve espacios de formación
+              estratégica donde las juventudes puedan pensar, liderar y
+              transformar el presente. Cree en una pedagogía que potencie el
+              pensamiento crítico y el compromiso colectivo.
             </p>
             <div class="founder-skills">
               <span class="skill-tag">Diplomacia</span>
@@ -631,21 +714,19 @@
           <div class="founder-card">
             <div class="founder-photo">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+                src="img/mica.jpg"
                 alt="Micaela Vázquez"
               />
             </div>
             <h3 class="founder-name">Micaela Vázquez</h3>
-            <p class="founder-role">Directora de Desarrollo & Cofundadora</p>
+            <p class="founder-role">Desarrolladora Full Stack</p>
             <p class="founder-bio">
-              Psicóloga educativa especializada en neuroaprendizaje. Desarrolla
-              metodologías basadas en evidencia científica para optimizar los
-              procesos de enseñanza-aprendizaje.
+              Estudiante de programación con fuerte compromiso y perseverancia. Apasionada por la tecnología y el desarrollo web, busca aplicar sus conocimientos para crear soluciones simples, funcionales y accesibles. Le motiva aprender y trabajar en equipo.</p>
             </p>
             <div class="founder-skills">
-              <span class="skill-tag">Neuroeducación</span>
-              <span class="skill-tag">Psicología</span>
-              <span class="skill-tag">Metodología</span>
+              <span class="skill-tag">Tecnología</span>
+              <span class="skill-tag">Proactividad</span>
+              <span class="skill-tag">Perseverancia</span>
             </div>
           </div>
 
@@ -727,7 +808,10 @@
 
         <div class="map-legend">
           <div class="legend-item">
-            <div class="legend-color" style="background: var(--sage-green)"></div>
+            <div
+              class="legend-color"
+              style="background: var(--sage-green)"
+            ></div>
             <span>Talleres y Actividades</span>
           </div>
         </div>
@@ -814,16 +898,4 @@
 
     <script src="script.js"></script>
   </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>d-color" style="background: var(--primary-burgundy)"></div>
-            <span>Bibliotecas Públicas</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-color" style="background: var(--warm-tan)"></div>
-            <span>Recursos Especializados</span>
-          </div>
-          <div class="legend-item">
-            <div class="legen
->>>>>>> a751d16114c35164b4869177faef71c9d6229e50
