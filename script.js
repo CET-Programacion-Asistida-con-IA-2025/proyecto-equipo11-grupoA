@@ -342,6 +342,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initNavigation();
     initButtonEffects();
     initCarousel();
+	observeStats(); // para animar las estadisticas
     
     // Inicializar buscador con timeout para asegurar que el DOM esté listo
     setTimeout(() => {
@@ -1044,6 +1045,56 @@ function initCarousel() {
     }, 5000);
 
     updateCarousel();
+}
+
+// Función para animar los números de las estadísticas
+function animateStats() {
+  const statNumbers = document.querySelectorAll('.stat-number');
+  
+  statNumbers.forEach(stat => {
+    const target = parseInt(stat.getAttribute('data-target'));
+    const duration = 2000; // 2 segundos de duración
+    const startTime = performance.now();
+    
+    function updateNumber(currentTime) {
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      
+      // Función de easing para una animación más suave
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      
+      const currentValue = Math.floor(target * easedProgress);
+      stat.textContent = currentValue.toLocaleString();
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateNumber);
+      } else {
+        stat.textContent = target.toLocaleString();
+      }
+    }
+    
+    requestAnimationFrame(updateNumber);
+  });
+}
+
+// Función para detectar cuando la sección entra en el viewport
+function observeStats() {
+  const statsSection = document.querySelector('.stats');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateStats();
+        observer.unobserve(entry.target); // Solo animar una vez
+      }
+    });
+  }, {
+    threshold: 0.3 // Activar cuando el 30% de la sección sea visible
+  });
+  
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
 }
 
 console.log("📝 ReDucativa Script Cargado");
