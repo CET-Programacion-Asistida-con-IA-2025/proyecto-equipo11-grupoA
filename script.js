@@ -331,24 +331,99 @@ let terminoBusqueda = '';
 document.addEventListener("DOMContentLoaded", function () {
     console.log("🚀 Iniciando ReDucativa...");
     
-    // Verificar si existe la sección del buscador
-    const searchSection = document.getElementById('buscador');
-    if (!searchSection) {
-        console.log("ℹ️ Sección buscador no encontrada");
-        return;
-    }
-    
-    // Inicializar otros componentes
+    // Inicializar componentes
     initNavigation();
     initButtonEffects();
     initCarousel();
-	observeStats(); // para animar las estadisticas
+    initCarouselHero(); // Añadir carrusel del hero
+    observeStats(); // para animar las estadisticas
     
-    // Inicializar buscador con timeout para asegurar que el DOM esté listo
-    setTimeout(() => {
-        initBuscador();
-    }, 100);
+    // Inicializar buscador si existe la sección
+    const searchSection = document.getElementById('buscador');
+    if (searchSection) {
+        setTimeout(() => {
+            initBuscador();
+        }, 100);
+    }
 });
+
+// ===== FUNCIÓN PARA INICIALIZAR EL CARRUSEL DEL HERO =====
+function initCarouselHero() {
+    const images = document.querySelectorAll('.carousel-img');
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    
+    if (!images.length) return;
+    
+    let currentSlide = 0;
+    const totalSlides = images.length;
+    
+    function showSlide(index) {
+        // Ocultar todas las imágenes
+        images.forEach(img => img.classList.remove('active'));
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        
+        // Mostrar imagen actual
+        images[index].classList.add('active');
+        indicators[index].classList.add('active');
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+    }
+    
+    // Event listeners para botones
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    
+    // Event listeners para indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            currentSlide = index;
+            showSlide(currentSlide);
+        });
+    });
+    
+    // Auto-slide cada 5 segundos
+    setInterval(nextSlide, 5000);
+}
+
+// Funciones globales para el carrusel (para onclick en HTML)
+function changeSlide(direction) {
+    const images = document.querySelectorAll('.carousel-img');
+    const indicators = document.querySelectorAll('.indicator');
+    let currentSlide = Array.from(images).findIndex(img => img.classList.contains('active'));
+    
+    if (direction === 1) {
+        currentSlide = (currentSlide + 1) % images.length;
+    } else {
+        currentSlide = (currentSlide - 1 + images.length) % images.length;
+    }
+    
+    images.forEach(img => img.classList.remove('active'));
+    indicators.forEach(indicator => indicator.classList.remove('active'));
+    
+    images[currentSlide].classList.add('active');
+    indicators[currentSlide].classList.add('active');
+}
+
+function goToSlide(index) {
+    const images = document.querySelectorAll('.carousel-img');
+    const indicators = document.querySelectorAll('.indicator');
+    
+    images.forEach(img => img.classList.remove('active'));
+    indicators.forEach(indicator => indicator.classList.remove('active'));
+    
+    images[index].classList.add('active');
+    indicators[index].classList.add('active');
+}
 
 // ===== INICIALIZACIÓN DEL BUSCADOR =====
 function initBuscador() {
@@ -966,7 +1041,7 @@ function initNavigation() {
         });
     }
 
-    // Scroll suave
+    // Scroll suave mejorado para navegación
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
@@ -974,39 +1049,142 @@ function initNavigation() {
                 e.preventDefault();
                 const targetElement = document.getElementById(href.substring(1));
                 if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    targetElement.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             }
         });
     });
 }
 
-// ===== EFECTOS DE BOTONES =====
+// ===== EFECTOS DE BOTONES CONECTADOS =====
 function initButtonEffects() {
+    // Botón "Explorar Recursos" del hero
     const explorarBtn = document.getElementById('explorar-btn');
-    const capacitacionBtn = document.getElementById('capacitacion-btn');
-    const registrarseBtn = document.getElementById('registrarse-btn');
-
     if (explorarBtn) {
         explorarBtn.addEventListener('click', () => {
-            document.getElementById('recursos')?.scrollIntoView({ behavior: 'smooth' });
+            scrollToSection('recursos');
         });
     }
 
+    // Botón "Comenzar Capacitación" del hero
+    const capacitacionBtn = document.getElementById('capacitacion-btn');
     if (capacitacionBtn) {
         capacitacionBtn.addEventListener('click', () => {
-            document.getElementById('buscador')?.scrollIntoView({ behavior: 'smooth' });
+            scrollToSection('buscador');
         });
     }
 
+    // Botón "Registrarse Gratis" del CTA
+    const registrarseBtn = document.getElementById('registrarse-btn');
     if (registrarseBtn) {
         registrarseBtn.addEventListener('click', () => {
             alert('¡Próximamente! Sistema de registro en desarrollo.');
         });
     }
+
+    // ===== CONECTAR TARJETAS DE FEATURES =====
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const category = card.getAttribute('data-category');
+            handleFeatureCardClick(category);
+        });
+    });
 }
 
-// ===== CARRUSEL SIMPLE =====
+// ===== FUNCIÓN PARA MANEJAR CLICS EN TARJETAS DE FEATURES =====
+function handleFeatureCardClick(category) {
+    switch(category) {
+        case 'recursos':
+            // "Biblioteca Digital" - ir al mapa de bibliotecas
+            scrollToSection('map-section');
+            break;
+        case 'capacitacion':
+            // "Cursos Especializados" - ir al buscador de cursos
+            scrollToSection('buscador');
+            break;
+        case 'comunidad':
+            // "Comunidad Educativa" - ir a fundadoras
+            scrollToSection('founders-carousel');
+            break;
+        case 'herramientas':
+            // "Herramientas Interactivas" - ir al buscador con filtro de herramientas
+            scrollToSection('buscador');
+            // Opcional: pre-filtrar por categoría educación digital
+            setTimeout(() => {
+                filterByCategory('educacion-digital');
+            }, 500);
+            break;
+        default:
+            console.log('Categoría no reconocida:', category);
+    }
+}
+
+// ===== FUNCIÓN AUXILIAR PARA SCROLL SUAVE =====
+function scrollToSection(sectionId) {
+    // Primero intentar con el ID directo
+    let targetElement = document.getElementById(sectionId);
+    
+    // Si no existe, intentar con querySelector por clase
+    if (!targetElement) {
+        targetElement = document.querySelector(`.${sectionId}`);
+    }
+    
+    if (targetElement) {
+        targetElement.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+        
+        // Añadir efecto visual temporal
+        targetElement.style.transition = 'background-color 0.3s ease';
+        const originalBg = targetElement.style.backgroundColor;
+        targetElement.style.backgroundColor = 'rgba(114, 47, 55, 0.1)';
+        
+        setTimeout(() => {
+            targetElement.style.backgroundColor = originalBg;
+        }, 1000);
+    } else {
+        console.warn(`Sección no encontrada: ${sectionId}`);
+    }
+}
+
+// ===== FUNCIÓN PARA FILTRAR POR CATEGORÍA =====
+function filterByCategory(categoria) {
+    // Verificar si el buscador está inicializado
+    if (!document.getElementById('coursesGrid')) {
+        console.warn('Buscador no inicializado');
+        return;
+    }
+    
+    // Limpiar filtros existentes
+    clearAllFilters();
+    
+    // Encontrar y marcar el checkbox de la categoría
+    const categoryCheckbox = document.querySelector(`input[name="categoria"][value="${categoria}"]`);
+    if (categoryCheckbox) {
+        categoryCheckbox.checked = true;
+        
+        // Activar el filtro
+        filtrosActivos.categoria = [categoria];
+        
+        // Abrir la sección de filtros de categoría
+        const categoryFilter = document.querySelector('[data-filter="categoria"]');
+        const categoryContent = document.getElementById('categoria-content');
+        if (categoryFilter && categoryContent) {
+            categoryFilter.classList.add('active');
+            categoryContent.classList.add('active');
+        }
+        
+        // Aplicar filtros
+        applyFilters();
+    }
+}
+
+// ===== CARRUSEL DE FUNDADORAS =====
 function initCarousel() {
     const track = document.getElementById("carouselTrack");
     const prevBtn = document.getElementById("prevBtn");
@@ -1049,52 +1227,52 @@ function initCarousel() {
 
 // Función para animar los números de las estadísticas
 function animateStats() {
-  const statNumbers = document.querySelectorAll('.stat-number');
-  
-  statNumbers.forEach(stat => {
-    const target = parseInt(stat.getAttribute('data-target'));
-    const duration = 2000; // 2 segundos de duración
-    const startTime = performance.now();
+    const statNumbers = document.querySelectorAll('.stat-number');
     
-    function updateNumber(currentTime) {
-      const elapsedTime = currentTime - startTime;
-      const progress = Math.min(elapsedTime / duration, 1);
-      
-      // Función de easing para una animación más suave
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-      
-      const currentValue = Math.floor(target * easedProgress);
-      stat.textContent = currentValue.toLocaleString();
-      
-      if (progress < 1) {
+    statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-target'));
+        const duration = 2000; // 2 segundos de duración
+        const startTime = performance.now();
+        
+        function updateNumber(currentTime) {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            
+            // Función de easing para una animación más suave
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            
+            const currentValue = Math.floor(target * easedProgress);
+            stat.textContent = currentValue.toLocaleString();
+            
+            if (progress < 1) {
+                requestAnimationFrame(updateNumber);
+            } else {
+                stat.textContent = target.toLocaleString();
+            }
+        }
+        
         requestAnimationFrame(updateNumber);
-      } else {
-        stat.textContent = target.toLocaleString();
-      }
-    }
-    
-    requestAnimationFrame(updateNumber);
-  });
+    });
 }
 
 // Función para detectar cuando la sección entra en el viewport
 function observeStats() {
-  const statsSection = document.querySelector('.stats');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateStats();
-        observer.unobserve(entry.target); // Solo animar una vez
-      }
+    const statsSection = document.querySelector('.stats');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                observer.unobserve(entry.target); // Solo animar una vez
+            }
+        });
+    }, {
+        threshold: 0.3 // Activar cuando el 30% de la sección sea visible
     });
-  }, {
-    threshold: 0.3 // Activar cuando el 30% de la sección sea visible
-  });
-  
-  if (statsSection) {
-    observer.observe(statsSection);
-  }
+    
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
 }
 
-console.log("📝 ReDucativa Script Cargado");
+console.log("📝 ReDucativa Script Cargado - Todos los botones conectados");

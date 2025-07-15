@@ -32,8 +32,8 @@
           <li><a href="#inicio" class="nav-link">Inicio</a></li>
           <li><a href="#recursos" class="nav-link">Recursos</a></li>
           <li><a href="#buscador" class="nav-link">Buscador</a></li>
-          <li><a href="#capacitacion" class="nav-link">Capacitación</a></li>
-          <li><a href="#nosotros" class="nav-link">Nosotras</a></li>
+          <li><a href="#map-section" class="nav-link">Bibliotecas</a></li>
+          <li><a href="#founders-carousel" class="nav-link">Nosotras</a></li>
         </ul>
         <div class="hamburger">
           <span></span>
@@ -124,39 +124,39 @@
       <div class="container">
         <h2 class="section-title">Busca acá tu siguiente oportunidad</h2>
         <div class="features-grid">
-          <div class="feature-card" data-category="recursos">
+          <div class="feature-card" data-category="recursos" style="cursor: pointer;">
             <div class="card-icon">📚</div>
             <h3>Biblioteca Digital</h3>
             <p>
               Accede a miles de recursos educativos organizados por materias y
-              niveles
+              niveles. Encuentra bibliotecas públicas cerca de ti.
             </p>
             <div class="card-hover-effect"></div>
           </div>
-          <div class="feature-card" data-category="capacitacion">
+          <div class="feature-card" data-category="capacitacion" style="cursor: pointer;">
             <div class="card-icon">🎓</div>
             <h3>Cursos Especializados</h3>
             <p>
               Programas de capacitación diseñados para fortalecer habilidades
-              específicas
+              específicas. Explora nuestro buscador de cursos.
             </p>
             <div class="card-hover-effect"></div>
           </div>
-          <div class="feature-card" data-category="comunidad">
+          <div class="feature-card" data-category="comunidad" style="cursor: pointer;">
             <div class="card-icon">👥</div>
             <h3>Comunidad Educativa</h3>
             <p>
               Conecta con otros estudiantes y educadores para colaborar y
-              aprender juntos
+              aprender juntos. Conoce a nuestro equipo.
             </p>
             <div class="card-hover-effect"></div>
           </div>
-          <div class="feature-card" data-category="herramientas">
+          <div class="feature-card" data-category="herramientas" style="cursor: pointer;">
             <div class="card-icon">🔧</div>
             <h3>Herramientas Interactivas</h3>
             <p>
               Simuladores, calculadoras y recursos interactivos para el
-              aprendizaje práctico
+              aprendizaje práctico y educación digital.
             </p>
             <div class="card-hover-effect"></div>
           </div>
@@ -607,8 +607,34 @@
       </div>
     </section>
 
+    <!-- Interactive Map Section -->
+    <section id="map-section" class="map-section">
+      <div class="container">
+        <h2 class="section-title">
+          Mapa de Bibliotecas Públicas de Buenos Aires
+        </h2>
+        <div class="mapa-posicion">
+          <iframe
+            src="https://www.google.com/maps/d/embed?mid=1SeHTZf1ursGN8E1bD1jy465MizisOdE&ehbc=2E312F"
+            width="640"
+            height="480"
+          ></iframe>
+        </div>
+
+        <div class="map-legend">
+          <div class="legend-item">
+            <div
+              class="legend-color"
+              style="background: var(--sage-green)"
+            ></div>
+            <span>Talleres y Actividades</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- SECCIÓN FUNDADORAS -->
-    <section class="founders-carousel">
+    <section id="founders-carousel" class="founders-carousel">
       <div class="carousel-title">
         <h2>Nuestras Fundadoras</h2>
         <p>
@@ -688,12 +714,12 @@
           <div class="founder-card">
             <div class="founder-photo">
               <img
-                src="img/Cande.jpg"
-                alt="Candela Ferreyra"
+                src=""
+                alt="Candela Ferreyro"
               />
             </div>
-            <h3 class="founder-name">Candela Ferreyra</h3>
-            <p class="founder-role">Estudiante de programación</p>
+            <h3 class="founder-name">Candela Ferreyro</h3>
+            <p class="founder-role">Directora de Innovación & Cofundadora</p>
             <p class="founder-bio">
               Experta en diseño de experiencias educativas digitales. Combina
               creatividad y tecnología para revolucionar la forma en que
@@ -722,32 +748,6 @@
       </div>
 
       <div class="carousel-indicators" id="indicators"></div>
-    </section>
-
-    <!-- Interactive Map Section -->
-    <section class="map-section">
-      <div class="container">
-        <h2 class="section-title">
-          Mapa de Bibliotecas Públicas de Buenos Aires
-        </h2>
-        <div class="mapa-posicion">
-          <iframe
-            src="https://www.google.com/maps/d/embed?mid=1SeHTZf1ursGN8E1bD1jy465MizisOdE&ehbc=2E312F"
-            width="640"
-            height="480"
-          ></iframe>
-        </div>
-
-        <div class="map-legend">
-          <div class="legend-item">
-            <div
-              class="legend-color"
-              style="background: var(--sage-green)"
-            ></div>
-            <span>Talleres y Actividades</span>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Statistics Section -->
@@ -804,21 +804,21 @@
           <div class="footer-links">
             <div class="link-group">
               <h4>Recursos</h4>
-              <a href="#">Biblioteca Digital</a>
-              <a href="#">Cursos Online</a>
-              <a href="#">Herramientas</a>
+              <a href="#map-section">Biblioteca Digital</a>
+              <a href="#buscador">Cursos Online</a>
+              <a href="#buscador">Herramientas</a>
             </div>
             <div class="link-group">
               <h4>Comunidad</h4>
-              <a href="#">Foros</a>
-              <a href="#">Eventos</a>
-              <a href="#">Blog</a>
+              <a href="#founders-carousel">Equipo</a>
+              <a href="#founders-carousel">Fundadoras</a>
+              <a href="#recursos">Recursos</a>
             </div>
             <div class="link-group">
               <h4>Soporte</h4>
-              <a href="#">Ayuda</a>
-              <a href="#">Contacto</a>
-              <a href="#">FAQ</a>
+              <a href="#founders-carousel">Ayuda</a>
+              <a href="#founders-carousel">Contacto</a>
+              <a href="#recursos">FAQ</a>
             </div>
           </div>
         </div>
